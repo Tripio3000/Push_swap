@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cseabass/push_swap/gnl/get_next_line.c
+get_next_line.h
+/Users/cseabass/push_swap/gnl/get_next_line.h
+../libft/libft.h
+/Users/cseabass/push_swap/libft/libft.h
+fcntl.h
+-
+stdio.h
+-
+
+/Users/cseabass/push_swap/gnl/get_next_line.h
+
+/Users/cseabass/push_swap/libft/libft.h
+unistd.h
+-
+stdlib.h
+-
+string.h
+-
+
