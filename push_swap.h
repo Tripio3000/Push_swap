@@ -8,9 +8,14 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
+typedef struct 		s_data
+{
+	int a;
+}					t_data;
+
 typedef struct 		s_stack
 {
-	int num;
+	t_data data;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }					t_stack;
