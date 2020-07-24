@@ -80,13 +80,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/cseabass/push_swap/checker.c">
-			<Option target="push_swap"/>
-		</Unit>
 		<Unit filename="/Users/cseabass/push_swap/gnl/get_next_line.c">
 			<Option target="push_swap"/>
 		</Unit>
 		<Unit filename="/Users/cseabass/push_swap/gnl/get_next_line.h">
+			<Option target="push_swap"/>
+		</Unit>
+		<Unit filename="/Users/cseabass/push_swap/includes/push_swap.h">
 			<Option target="push_swap"/>
 		</Unit>
 		<Unit filename="/Users/cseabass/push_swap/libft/ft_atoi.c">
@@ -266,7 +266,7 @@
 		<Unit filename="/Users/cseabass/push_swap/libft/libft.h">
 			<Option target="push_swap"/>
 		</Unit>
-		<Unit filename="/Users/cseabass/push_swap/push_swap.h">
+		<Unit filename="/Users/cseabass/push_swap/src/checker.c">
 			<Option target="push_swap"/>
 		</Unit>
 		<Unit filename="/Users/cseabass/push_swap/CMakeLists.txt">

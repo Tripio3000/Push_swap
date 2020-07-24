@@ -123,33 +123,6 @@ push_swap/fast:
 	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/build
 .PHONY : push_swap/fast
 
-checker.o: checker.c.o
-
-.PHONY : checker.o
-
-# target to build an object file
-checker.c.o:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/checker.c.o
-.PHONY : checker.c.o
-
-checker.i: checker.c.i
-
-.PHONY : checker.i
-
-# target to preprocess a source file
-checker.c.i:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/checker.c.i
-.PHONY : checker.c.i
-
-checker.s: checker.c.s
-
-.PHONY : checker.s
-
-# target to generate assembly for a file
-checker.c.s:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/checker.c.s
-.PHONY : checker.c.s
-
 gnl/get_next_line.o: gnl/get_next_line.c.o
 
 .PHONY : gnl/get_next_line.o
@@ -1743,6 +1716,33 @@ libft/ft_toupper.c.s:
 	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/libft/ft_toupper.c.s
 .PHONY : libft/ft_toupper.c.s
 
+src/checker.o: src/checker.c.o
+
+.PHONY : src/checker.o
+
+# target to build an object file
+src/checker.c.o:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/checker.c.o
+.PHONY : src/checker.c.o
+
+src/checker.i: src/checker.c.i
+
+.PHONY : src/checker.i
+
+# target to preprocess a source file
+src/checker.c.i:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/checker.c.i
+.PHONY : src/checker.c.i
+
+src/checker.s: src/checker.c.s
+
+.PHONY : src/checker.s
+
+# target to generate assembly for a file
+src/checker.c.s:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/checker.c.s
+.PHONY : src/checker.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1752,9 +1752,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... push_swap"
-	@echo "... checker.o"
-	@echo "... checker.i"
-	@echo "... checker.s"
 	@echo "... gnl/get_next_line.o"
 	@echo "... gnl/get_next_line.i"
 	@echo "... gnl/get_next_line.s"
@@ -1932,6 +1929,9 @@ help:
 	@echo "... libft/ft_toupper.o"
 	@echo "... libft/ft_toupper.i"
 	@echo "... libft/ft_toupper.s"
+	@echo "... src/checker.o"
+	@echo "... src/checker.i"
+	@echo "... src/checker.s"
 .PHONY : help
 
 

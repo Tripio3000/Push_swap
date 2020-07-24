@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/push_swap.dir/checker.c.o"
   "CMakeFiles/push_swap.dir/gnl/get_next_line.c.o"
   "CMakeFiles/push_swap.dir/libft/ft_atoi.c.o"
   "CMakeFiles/push_swap.dir/libft/ft_bzero.c.o"
@@ -59,6 +58,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/push_swap.dir/libft/ft_strtrim.c.o"
   "CMakeFiles/push_swap.dir/libft/ft_tolower.c.o"
   "CMakeFiles/push_swap.dir/libft/ft_toupper.c.o"
+  "CMakeFiles/push_swap.dir/src/checker.c.o"
   "push_swap"
   "push_swap.pdb"
 )

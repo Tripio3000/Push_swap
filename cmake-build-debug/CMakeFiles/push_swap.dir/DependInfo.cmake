@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/cseabass/push_swap/checker.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/checker.c.o"
   "/Users/cseabass/push_swap/gnl/get_next_line.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/gnl/get_next_line.c.o"
   "/Users/cseabass/push_swap/libft/ft_atoi.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/libft/ft_atoi.c.o"
   "/Users/cseabass/push_swap/libft/ft_bzero.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/libft/ft_bzero.c.o"
@@ -64,6 +63,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/cseabass/push_swap/libft/ft_strtrim.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/libft/ft_strtrim.c.o"
   "/Users/cseabass/push_swap/libft/ft_tolower.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/libft/ft_tolower.c.o"
   "/Users/cseabass/push_swap/libft/ft_toupper.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/libft/ft_toupper.c.o"
+  "/Users/cseabass/push_swap/src/checker.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/src/checker.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

@@ -6,16 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/cseabass/push_swap/gnl/get_next_line.c
-get_next_line.h
-/Users/cseabass/push_swap/gnl/get_next_line.h
-../libft/libft.h
-/Users/cseabass/push_swap/libft/libft.h
-fcntl.h
--
-stdio.h
--
-
 /Users/cseabass/push_swap/gnl/get_next_line.h
 
 /Users/cseabass/push_swap/libft/libft.h
@@ -25,4 +15,22 @@ stdlib.h
 -
 string.h
 -
+
+/Users/cseabass/push_swap/push_swap.h
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+stdlib.h
+-
+libft/libft.h
+/Users/cseabass/push_swap/libft/libft.h
+gnl/get_next_line.h
+/Users/cseabass/push_swap/gnl/get_next_line.h
+
+/Users/cseabass/push_swap/src/checker.c
+../push_swap.h
+/Users/cseabass/push_swap/push_swap.h
 
