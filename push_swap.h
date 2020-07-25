@@ -10,14 +10,16 @@
 
 typedef struct 		s_data
 {
-	int a;
+	int num;
+	struct s_data	*next;
+	struct s_data	*prev;
 }					t_data;
 
 typedef struct 		s_stack
 {
-	t_data data;
-	struct s_stack	*next;
-	struct s_stack	*prev;
+	size_t size;
+	t_data 	*head;
+	t_data 	*end;
 }					t_stack;
 
 #endif
