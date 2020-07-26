@@ -34,11 +34,26 @@ char 	**ft_split(char *str)
 	return (mas);
 }
 
+void 	pushBack(t_stack *src, int num)
+{
+	t_data *tmp = (t_data *)malloc(sizeof(t_data));
+	tmp->num = num;
+	tmp->next = NULL;
+	tmp->prev = src->end;
+	if (src->end)
+		src->end->next = tmp;
+	src->end = tmp;
+	if (src->head == NULL)
+		src->head = tmp;
+	src->size++;
+}
+
 //		ЗАПОЛНЕНИЕ СПИСКА ЧИСЛАМИ ИЗ АРГУМЕНТА
 void	create_stack(t_stack *a, int ac, char **av)
 {
 	int i;
 	int j;
+	int num;
 	char **mas;
 
 	i = 1;
@@ -48,17 +63,8 @@ void	create_stack(t_stack *a, int ac, char **av)
 		j = 0;
 		while (mas[j] != 0)
 		{
-			t_data *tmp = (t_data *)malloc(sizeof(t_data));
-			tmp->num = ft_atoi(mas[j]);
-			tmp->next = NULL;
-			tmp->prev = a->end;
-			if (a->end)
-				a->end->next = tmp;
-			a->end = tmp;
-			if (a->head == NULL)
-				a->head = tmp;
-			a->size++;
-//			printf("current: %d\n", a->end->num);
+			num = ft_atoi(mas[j]);
+			pushBack(a, num);
 			j++;
 		}
 		i++;
@@ -94,28 +100,37 @@ void 	swap(t_stack *a)
 	p1->next = p3;
 	if (p3)
 		p3->prev = p1;
+	else
+		a->end = p1;
 	p1->prev = p2;
 
 	print_stack(a);
 }
 
+void 	swapper(char *arr, t_stack *a, t_stack *b)
+{
+	if (ft_strcmp(arr, "sa") == 0 && a->head != NULL && a->head->next != NULL)
+		swap(a);
+	if (ft_strcmp(arr, "sb") == 0 && b->head != NULL && b->head->next != NULL)
+		swap(b);
+	if (ft_strcmp(arr, "ss") == 0 && a->head != NULL && a->head->next != NULL
+		&& b->head != NULL && b->head->next != NULL)
+	{
+		swap(a);
+		swap(b);
+	}
+}
+
 void 	push1(t_data *p1, t_stack *b)
 {
-	t_data *p2;
-
+	p1->next = NULL;
+	p1->prev = b->end;
+	if (b->end)
+		b->end->next = p1;
+	b->end = p1;
 	if (b->head == NULL)
-	{
 		b->head = p1;
-		b->head->next = NULL;
-	}
-	else
-	{
-		p2 = b->head;
-		b->head = p1;
-		p1->next = p2;
-		p1->prev = NULL;
-		p2->prev = p1;
-	}
+	b->size++;
 }
 
 void 	push(t_stack *src, t_stack *dst)
@@ -128,6 +143,7 @@ void 	push(t_stack *src, t_stack *dst)
 	{
 		push1(p1, dst);
 		src->head = NULL;
+		src->size--;
 		printf("\na: ");
 		print_stack(src);
 		printf("\nb: ");
@@ -136,6 +152,7 @@ void 	push(t_stack *src, t_stack *dst)
 	}
 	p2 = p1->next;
 	src->head = p2;
+	src->size--;
 	p2->prev = NULL;
 	push1(p1, dst);
 
@@ -154,17 +171,41 @@ void 	init(t_stack *a, t_stack *b)
 	b->head = b->end = NULL;
 }
 
-void 	swapper(char *arr, t_stack *a, t_stack *b)
+void 	rev_rotate(t_stack *src)
 {
-	if (ft_strcmp(arr, "sa") == 0 && a->head != NULL && a->head->next != NULL)
-		swap(a);
-	if (ft_strcmp(arr, "sb") == 0 && b->head != NULL && b->head->next != NULL)
-		swap(b);
-	if (ft_strcmp(arr, "ss") == 0 && a->head != NULL && a->head->next != NULL
-	&& b->head != NULL && b->head->next != NULL)
+	t_data *p1;
+	t_data *p2;
+
+	ft_putstr("\nmas: ");
+	print_stack(src);
+
+	p1 = src->end;
+	p2 = src->end->prev;
+	p1->next = src->head;
+	p1->prev = NULL;
+	if (src->head)
+		src->head->prev = p1;
+	src->head = p1;
+	if (src->end == NULL)
+		src->end = p1;
+	src->end = p2;
+	p2->next = NULL;
+
+	ft_putstr("\nrotmas: ");
+	print_stack(src);
+}
+
+void 	rev_rotation(char *arr, t_stack *a, t_stack *b)
+{
+	if (ft_strcmp(arr, "rra") == 0 && a->head != NULL && a->head->next != NULL)
+		rev_rotate(a);
+	if (ft_strcmp(arr, "rrb") == 0 && b->head != NULL && b->head->next != NULL)
+		rev_rotate(b);
+	if (ft_strcmp(arr, "rrr") == 0 && a->head != NULL && a->head->next != NULL
+		&& b->head != NULL && b->head->next != NULL)
 	{
-		swap(a);
-		swap(b);
+		rev_rotate(a);
+		rev_rotate(b);
 	}
 }
 
@@ -177,11 +218,16 @@ void 	rotate(t_stack *src)
 	print_stack(src);
 
 	p1 = src->head;
-	p2 = src->end->prev;
-	src->head = src->end;
-	src->head->prev = NULL;
-	src->head->next = p1;
-	p2->next = NULL;
+	p2 = src->head->next;
+	p1->next = NULL;
+	p1->prev = src->end;
+	if (src->end)
+		src->end->next = p1;
+	src->end = p1;
+	if (src->head == NULL)
+		src->head = p1;
+	src->head = p2;
+	p2->prev = NULL;
 
 	ft_putstr("\nrotmas: ");
 	print_stack(src);
@@ -199,7 +245,6 @@ void 	rotation(char *arr, t_stack *a, t_stack *b)
 		rotate(a);
 		rotate(b);
 	}
-
 }
 
 int 	main(int ac, char **av)
@@ -224,28 +269,27 @@ int 	main(int ac, char **av)
 	print_stack(b);
 	printf("\n");
 
-	rotate(a);
-
-//	push(a, b);
-//	swap(a);
 
 //		ЧТЕНИЕ СТАНДАРТНОГО ВВОДА
-//	while(get_next_line(0, &arr) > 0)
-//	{
-//		if (ft_strcmp(arr, "sa") == 0 ||
-//			ft_strcmp(arr, "sb") == 0 ||
-//			ft_strcmp(arr, "ss") == 0)
-//			swapper(arr, a, b);
-//		if (ft_strcmp(arr, "pb") == 0 && a->head != NULL)
-//			push(a, b);
-//		if (ft_strcmp(arr, "pa") == 0 && b->head != NULL)
-//			push(b, a);
-//		if (ft_strcmp(arr, "ra") == 0 ||
-//			ft_strcmp(arr, "rb") == 0 ||
-//			ft_strcmp(arr, "rr") == 0)
-//			rotation(arr, a, b);
-//
-//	}
+	while(get_next_line(0, &arr) > 0)
+	{
+		if (ft_strcmp(arr, "sa") == 0 ||
+			ft_strcmp(arr, "sb") == 0 ||
+			ft_strcmp(arr, "ss") == 0)
+			swapper(arr, a, b);
+		if (ft_strcmp(arr, "pb") == 0 && a->head != NULL)
+			push(a, b);
+		if (ft_strcmp(arr, "pa") == 0 && b->head != NULL)
+			push(b, a);
+		if (ft_strcmp(arr, "rra") == 0 ||
+			ft_strcmp(arr, "rrb") == 0 ||
+			ft_strcmp(arr, "rrr") == 0)
+			rev_rotation(arr, a, b);
+		if (ft_strcmp(arr, "ra") == 0 ||
+			ft_strcmp(arr, "rb") == 0 ||
+			ft_strcmp(arr, "rr") == 0)
+			rotation(arr, a, b);
+	}
 	printf("\nHello    world\n");
 	return (0);
 }
