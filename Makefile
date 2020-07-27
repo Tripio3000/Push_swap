@@ -1,4 +1,4 @@
-FILES = src/checker.c \
+FILES = src/checker.c src/push_swap.c \
 
 INCLUDES = push_swap.h
 

@@ -64,6 +64,8 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/cseabass/push_swap/libft/ft_tolower.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/libft/ft_tolower.c.o"
   "/Users/cseabass/push_swap/libft/ft_toupper.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/libft/ft_toupper.c.o"
   "/Users/cseabass/push_swap/src/checker.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/src/checker.c.o"
+  "/Users/cseabass/push_swap/src/main.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/src/main.c.o"
+  "/Users/cseabass/push_swap/src/push_swap.c" "/Users/cseabass/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir/src/push_swap.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

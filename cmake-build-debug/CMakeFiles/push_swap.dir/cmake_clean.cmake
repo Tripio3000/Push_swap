@@ -59,6 +59,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/push_swap.dir/libft/ft_tolower.c.o"
   "CMakeFiles/push_swap.dir/libft/ft_toupper.c.o"
   "CMakeFiles/push_swap.dir/src/checker.c.o"
+  "CMakeFiles/push_swap.dir/src/main.c.o"
+  "CMakeFiles/push_swap.dir/src/push_swap.c.o"
   "push_swap"
   "push_swap.pdb"
 )

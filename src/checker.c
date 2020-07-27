@@ -111,29 +111,26 @@ void 	swap(t_stack *a)
 
 void 	swapper(char *arr, t_stack *a, t_stack *b)
 {
-	if (ft_strcmp(arr, "sa") == 0 && a->head != NULL && a->head->next != NULL)
+	if ((ft_strcmp(arr, "sa") == 0 || ft_strcmp(arr, "ss") == 0) &&
+		a->head != NULL && a->head->next != NULL)
 		swap(a);
-	if (ft_strcmp(arr, "sb") == 0 && b->head != NULL && b->head->next != NULL)
+	if ((ft_strcmp(arr, "sb") == 0 || ft_strcmp(arr, "ss") == 0) &&
+		b->head != NULL && b->head->next != NULL)
 		swap(b);
-	if (ft_strcmp(arr, "ss") == 0 && a->head != NULL && a->head->next != NULL
-		&& b->head != NULL && b->head->next != NULL)
-	{
-		swap(a);
-		swap(b);
-	}
-	print_stack(a, 'a');
-	print_stack(b, 'b');
+
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
 }
 
 void 	push1(t_data *p1, t_stack *b)
 {
-	p1->next = NULL;
-	p1->prev = b->end;
-	if (b->end)
-		b->end->next = p1;
-	b->end = p1;
-	if (b->head == NULL)
-		b->head = p1;
+	p1->prev = NULL;
+	p1->next = b->head;
+	if (b->head)
+		b->head->prev = p1;
+	b->head = p1;
+	if (b->end == NULL)
+		b->end = p1;
 	b->size++;
 }
 
@@ -191,18 +188,15 @@ void 	rev_rotate(t_stack *src)
 
 void 	rev_rotation(char *arr, t_stack *a, t_stack *b)
 {
-	if (ft_strcmp(arr, "rra") == 0 && a->head != NULL && a->head->next != NULL)
+	if ((ft_strcmp(arr, "rra") == 0 || ft_strcmp(arr, "rrr") == 0) &&
+		a->head != NULL && a->head->next != NULL)
 		rev_rotate(a);
-	if (ft_strcmp(arr, "rrb") == 0 && b->head != NULL && b->head->next != NULL)
+	if ((ft_strcmp(arr, "rrb") == 0 || ft_strcmp(arr, "rrr") == 0) &&
+		b->head != NULL && b->head->next != NULL)
 		rev_rotate(b);
-	if (ft_strcmp(arr, "rrr") == 0 && a->head != NULL && a->head->next != NULL
-		&& b->head != NULL && b->head->next != NULL)
-	{
-		rev_rotate(a);
-		rev_rotate(b);
-	}
-	print_stack(a, 'a');
-	print_stack(b, 'b');
+
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
 }
 
 void 	rotate(t_stack *src)
@@ -231,18 +225,15 @@ void 	rotate(t_stack *src)
 
 void 	rotation(char *arr, t_stack *a, t_stack *b)
 {
-	if (ft_strcmp(arr, "ra") == 0 && a->head != NULL && a->head->next != NULL)
+	if ((ft_strcmp(arr, "ra") == 0 || ft_strcmp(arr, "rr") == 0) &&
+		a->head != NULL && a->head->next != NULL)
 		rotate(a);
-	if (ft_strcmp(arr, "rb") == 0 && b->head != NULL && b->head->next != NULL)
+	if ((ft_strcmp(arr, "rb") == 0 || ft_strcmp(arr, "rr") == 0) &&
+		b->head != NULL && b->head->next != NULL)
 		rotate(b);
-	if (ft_strcmp(arr, "rr") == 0 && a->head != NULL && a->head->next != NULL
-		&& b->head != NULL && b->head->next != NULL)
-	{
-		rotate(a);
-		rotate(b);
-	}
-	print_stack(a, 'a');
-	print_stack(b, 'b');
+
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
 }
 
 void	ascending_order(t_stack *a, int size)
@@ -277,7 +268,7 @@ void	ascending_order(t_stack *a, int size)
 }
 
 //		ЧТЕНИЕ СТАНДАРТНОГО ВВОДА
-void 	std_input(t_stack *a, t_stack *b)
+void 	std_input(t_stack *a, t_stack *b, int size)
 {
 	char *arr;
 
@@ -290,14 +281,14 @@ void 	std_input(t_stack *a, t_stack *b)
 		if (ft_strcmp(arr, "pb") == 0 && a->head != NULL)
 		{
 			push(a, b);
-			print_stack(a, 'a');
-			print_stack(b, 'b');
+//			print_stack(a, 'a');
+//			print_stack(b, 'b');
 		}
 		if (ft_strcmp(arr, "pa") == 0 && b->head != NULL)
 		{
 			push(b, a);
-			print_stack(a, 'a');
-			print_stack(b, 'b');
+//			print_stack(a, 'a');
+//			print_stack(b, 'b');
 		}
 		if (ft_strcmp(arr, "rra") == 0 ||
 			ft_strcmp(arr, "rrb") == 0 ||
@@ -308,29 +299,28 @@ void 	std_input(t_stack *a, t_stack *b)
 			ft_strcmp(arr, "rr") == 0)
 			rotation(arr, a, b);
 	}
-}
-
-int 	main(int ac, char **av)
-{
-	char *arr;
-	t_stack *a;
-	t_stack *b;
-	int size;
-
-	a = (t_stack *)malloc(sizeof(t_stack));
-	b = (t_stack *)malloc(sizeof(t_stack));
-	init(a, b);
-	create_stack(a, ac, av);
-	size = a->size;
-
-	print_stack(a, 'a');
-	print_stack(b, 'b');
-
-//	push(a, b);
-//	push(a, b);
-//	push(b, a);
-
-	std_input(a, b);
 	ascending_order(a, size);
-	return (0);
 }
+
+//int 	main(int ac, char **av)
+//{
+//	char *arr;
+//	t_stack *a;
+//	t_stack *b;
+//	int size;
+//
+//	a = (t_stack *)malloc(sizeof(t_stack));
+//	b = (t_stack *)malloc(sizeof(t_stack));
+//	init(a, b);
+//	create_stack(a, ac, av);
+//	size = a->size;
+//
+////	print_stack(a, 'a');
+////	print_stack(b, 'b');
+//
+//	if (ft_strcmp(av[0], "./a.out") == 0)
+//		std_input(a, b, size);
+//	else
+//		push_swap(a, b);
+//	return (0);
+//}
