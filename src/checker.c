@@ -45,11 +45,11 @@ void	ascending_order(t_stack *a, int size)
 	t_data *p1;
 	t_data *p2;
 
-//	if (a->size != size)
-//	{
-//		ft_putstr("KO\n");
-//		return ;
-//	}
+	if (a->size != size)
+	{
+		ft_putstr("KO\n");
+		return ;
+	}
 	i = 0;
 	p1 = a->head;
 	p2 = p1->next;
