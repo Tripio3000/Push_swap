@@ -179,8 +179,18 @@ CMakeFiles/push_swap.dir/libft/ft_tolower.c.o
 CMakeFiles/push_swap.dir/libft/ft_toupper.c.o
  /Users/cseabass/push_swap/libft/ft_toupper.c
  /Users/cseabass/push_swap/libft/libft.h
-CMakeFiles/push_swap.dir/src/checker.c.o
+CMakeFiles/push_swap.dir/src/operators.c.o
  /Users/cseabass/push_swap/gnl/get_next_line.h
  /Users/cseabass/push_swap/libft/libft.h
  /Users/cseabass/push_swap/push_swap.h
- /Users/cseabass/push_swap/src/checker.c
+ /Users/cseabass/push_swap/src/operators.c
+CMakeFiles/push_swap.dir/src/push_swap.c.o
+ /Users/cseabass/push_swap/gnl/get_next_line.h
+ /Users/cseabass/push_swap/libft/libft.h
+ /Users/cseabass/push_swap/push_swap.h
+ /Users/cseabass/push_swap/src/push_swap.c
+CMakeFiles/push_swap.dir/src/read.c.o
+ /Users/cseabass/push_swap/gnl/get_next_line.h
+ /Users/cseabass/push_swap/libft/libft.h
+ /Users/cseabass/push_swap/push_swap.h
+ /Users/cseabass/push_swap/src/read.c

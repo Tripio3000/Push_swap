@@ -1716,59 +1716,32 @@ libft/ft_toupper.c.s:
 	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/libft/ft_toupper.c.s
 .PHONY : libft/ft_toupper.c.s
 
-src/checker.o: src/checker.c.o
+src/operators.o: src/operators.c.o
 
-.PHONY : src/checker.o
-
-# target to build an object file
-src/checker.c.o:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/checker.c.o
-.PHONY : src/checker.c.o
-
-src/checker.i: src/checker.c.i
-
-.PHONY : src/checker.i
-
-# target to preprocess a source file
-src/checker.c.i:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/checker.c.i
-.PHONY : src/checker.c.i
-
-src/checker.s: src/checker.c.s
-
-.PHONY : src/checker.s
-
-# target to generate assembly for a file
-src/checker.c.s:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/checker.c.s
-.PHONY : src/checker.c.s
-
-src/main.o: src/main.c.o
-
-.PHONY : src/main.o
+.PHONY : src/operators.o
 
 # target to build an object file
-src/main.c.o:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/main.c.o
-.PHONY : src/main.c.o
+src/operators.c.o:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/operators.c.o
+.PHONY : src/operators.c.o
 
-src/main.i: src/main.c.i
+src/operators.i: src/operators.c.i
 
-.PHONY : src/main.i
+.PHONY : src/operators.i
 
 # target to preprocess a source file
-src/main.c.i:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/main.c.i
-.PHONY : src/main.c.i
+src/operators.c.i:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/operators.c.i
+.PHONY : src/operators.c.i
 
-src/main.s: src/main.c.s
+src/operators.s: src/operators.c.s
 
-.PHONY : src/main.s
+.PHONY : src/operators.s
 
 # target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/main.c.s
-.PHONY : src/main.c.s
+src/operators.c.s:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/operators.c.s
+.PHONY : src/operators.c.s
 
 src/push_swap.o: src/push_swap.c.o
 
@@ -1796,6 +1769,33 @@ src/push_swap.s: src/push_swap.c.s
 src/push_swap.c.s:
 	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/push_swap.c.s
 .PHONY : src/push_swap.c.s
+
+src/read.o: src/read.c.o
+
+.PHONY : src/read.o
+
+# target to build an object file
+src/read.c.o:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/read.c.o
+.PHONY : src/read.c.o
+
+src/read.i: src/read.c.i
+
+.PHONY : src/read.i
+
+# target to preprocess a source file
+src/read.c.i:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/read.c.i
+.PHONY : src/read.c.i
+
+src/read.s: src/read.c.s
+
+.PHONY : src/read.s
+
+# target to generate assembly for a file
+src/read.c.s:
+	$(MAKE) -f CMakeFiles/push_swap.dir/build.make CMakeFiles/push_swap.dir/src/read.c.s
+.PHONY : src/read.c.s
 
 # Help Target
 help:
@@ -1983,15 +1983,15 @@ help:
 	@echo "... libft/ft_toupper.o"
 	@echo "... libft/ft_toupper.i"
 	@echo "... libft/ft_toupper.s"
-	@echo "... src/checker.o"
-	@echo "... src/checker.i"
-	@echo "... src/checker.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/operators.o"
+	@echo "... src/operators.i"
+	@echo "... src/operators.s"
 	@echo "... src/push_swap.o"
 	@echo "... src/push_swap.i"
 	@echo "... src/push_swap.s"
+	@echo "... src/read.o"
+	@echo "... src/read.i"
+	@echo "... src/read.s"
 .PHONY : help
 
 

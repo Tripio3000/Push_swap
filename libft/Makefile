@@ -6,7 +6,7 @@
 #    By: cseabass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/11 20:11:29 by cseabass          #+#    #+#              #
-#    Updated: 2019/09/22 20:26:38 by cseabass         ###   ########.fr        #
+#    Updated: 2019/10/25 17:09:31 by cseabass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ $(OBJ): %.o : %.c
 	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $<
 
 clean:
-		@/bin/rm -f $(OBJ)
+		        @/bin/rm -f $(OBJ)
 
 fclean: clean
 		        @/bin/rm -f $(NAME)

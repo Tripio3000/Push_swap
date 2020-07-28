@@ -266,13 +266,13 @@
 		<Unit filename="/Users/cseabass/push_swap/push_swap.h">
 			<Option target="push_swap"/>
 		</Unit>
-		<Unit filename="/Users/cseabass/push_swap/src/checker.c">
-			<Option target="push_swap"/>
-		</Unit>
-		<Unit filename="/Users/cseabass/push_swap/src/main.c">
+		<Unit filename="/Users/cseabass/push_swap/src/operators.c">
 			<Option target="push_swap"/>
 		</Unit>
 		<Unit filename="/Users/cseabass/push_swap/src/push_swap.c">
+			<Option target="push_swap"/>
+		</Unit>
+		<Unit filename="/Users/cseabass/push_swap/src/read.c">
 			<Option target="push_swap"/>
 		</Unit>
 		<Unit filename="/Users/cseabass/push_swap/CMakeLists.txt">
