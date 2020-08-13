@@ -156,7 +156,6 @@ t_data	*get_prior(t_data *tmp, t_stack *a)
 	return (p);
 }
 
-
 void 	sort_a(t_stack *a)
 {
 	t_data *p;
@@ -184,6 +183,25 @@ void 	sort_a(t_stack *a)
 	}
 }
 
+t_data	*get_min(t_stack *src)
+{
+	t_data *p;
+	t_data *tmp;
+	int i;
+
+	p = src->head;
+	while (p != NULL)
+	{
+		if (p->num < i)
+		{
+			i = p->num;
+			tmp = p;
+		}
+		p = p->next;
+	}
+	return (tmp);
+}
+
 void 	prior_b(t_stack *a, t_stack *b)
 {
 	t_data *p1;
@@ -191,18 +209,24 @@ void 	prior_b(t_stack *a, t_stack *b)
 	t_data *p3;
 	int prior;
 
-	p1 = a->head;
-	p2 = p1->next;
+
+	p1 = get_min(a);
+	if (p1->next)
+		p2 = p1->next;
+	else
+		p2 = a->head;
+//	p2 = p1->next;
 	p3 = b->head;
+//	p3 = get_min(b);
 	prior = 0;
 	while (p3 != NULL)
 	{
-		if (p1->num > p3->num)
+		if (p3->num < p1->num)
 			p3->prior = prior;
 		p3 = p3->next;
 	}
 	prior++;
-	while (p2 != NULL)
+	while (p2 != NULL || p2 != p1)
 	{
 		p3 = b->head;
 		while (p3 != NULL)
@@ -226,7 +250,17 @@ void 	prior_b(t_stack *a, t_stack *b)
 
 void 	compound_ab(t_stack *a, t_stack *b)
 {
+	int i;
 
+	i = b->head->prior;
+	while (i > 0)
+	{
+		rotate(a);
+		ft_putstr("ra\n");
+		i--;
+	}
+	push(b, a);
+	ft_putstr("pb\n");
 }
 
 int 	main(int ac, char **av)
@@ -252,7 +286,12 @@ int 	main(int ac, char **av)
 	tmp = get_prior(tmp, a);
 	to_stack_b(tmp, a, b, size);
 	sort_a(a);
-	prior_b(a, b);
+	while(b->size > 0)
+	{
+		prior_b(a, b);
+		compound_ab(a, b);
+	}
+
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
