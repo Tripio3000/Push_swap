@@ -102,6 +102,7 @@ void 	to_stack_b(t_data *tmp, t_stack *a, t_stack *b, int size)
 		if (p->prior != 0)
 		{
 			rotate(a);
+			a->command++;
 			ft_putstr("ra\n");
 			if (check_list(a, size))
 				return ;
@@ -109,6 +110,7 @@ void 	to_stack_b(t_data *tmp, t_stack *a, t_stack *b, int size)
 		else if (p->prior == 0)
 		{
 			push(a, b);
+			a->command++;
 			ft_putstr("pb\n");
 		}
 		i++;
@@ -124,6 +126,7 @@ void	check_swap(t_stack *a)
 	if (a->head->num > p->num)
 	{
 		swap(a);
+		a->command++;
 		ft_putstr("sa\n");
 	}
 }
@@ -173,11 +176,13 @@ void 	sort_a(t_stack *a)
 		if ((i - 1) < (a->size  - (i - 1)))
 		{
 			rotate(a);
+			a->command++;
 			ft_putstr("ra\n");
 		}
 		else
 		{
 			rev_rotate(a);
+			a->command++;
 			ft_putstr("rra\n");
 		}
 	}
@@ -189,6 +194,7 @@ t_data	*get_min(t_stack *src)
 	t_data *tmp;
 	int i;
 
+	i = INT_MAX;
 	p = src->head;
 	while (p != NULL)
 	{
@@ -207,18 +213,26 @@ void 	prior_b(t_stack *a, t_stack *b)
 	t_data *p1;
 	t_data *p2;
 	t_data *p3;
+	t_data *start;
 	int prior;
-
+//	int shift;
 
 	p1 = get_min(a);
+	start = a->head;
+	prior = 0;
+	while (start != p1)
+	{
+		start = start->next;
+		prior++;
+	}
+	start = p1;
 	if (p1->next)
 		p2 = p1->next;
 	else
 		p2 = a->head;
 //	p2 = p1->next;
 	p3 = b->head;
-//	p3 = get_min(b);
-	prior = 0;
+//	prior = shift;
 	while (p3 != NULL)
 	{
 		if (p3->num < p1->num)
@@ -226,7 +240,9 @@ void 	prior_b(t_stack *a, t_stack *b)
 		p3 = p3->next;
 	}
 	prior++;
-	while (p2 != NULL || p2 != p1)
+	if (prior >= a->size)
+		prior -= a->size;
+	while (p2 != start)
 	{
 		p3 = b->head;
 		while (p3 != NULL)
@@ -237,12 +253,16 @@ void 	prior_b(t_stack *a, t_stack *b)
 		}
 		p1 = p2;
 		p2 = p2->next;
+		if (p2 == NULL)
+			p2 = a->head;
 		prior++;
+		if (prior >= a->size)
+			prior -= a->size;
 	}
 	p3 = b->head;
 	while (p3 != NULL)
 	{
-		if (p1->num < p3->num)
+		if (p3->num > p1->num)
 			p3->prior = prior;
 		p3 = p3->next;
 	}
@@ -256,11 +276,44 @@ void 	compound_ab(t_stack *a, t_stack *b)
 	while (i > 0)
 	{
 		rotate(a);
+		a->command++;
 		ft_putstr("ra\n");
 		i--;
 	}
 	push(b, a);
+	a->command++;
 	ft_putstr("pb\n");
+}
+
+void 	rotate_stack_a(t_stack *a)
+{
+	t_data *p;
+	t_data *p1;
+	int i;
+
+	i = 0;
+	p = get_min(a);
+	p1 = a->head;
+	while (p1 != p)
+	{
+		i++;
+		p1 = p1->next;
+	}
+	while (a->head != p)
+	{
+		if ((i - 1) < (a->size  - (i - 1)))
+		{
+			rotate(a);
+			a->command++;
+			ft_putstr("ra\n");
+		}
+		else
+		{
+			rev_rotate(a);
+			a->command++;
+			ft_putstr("rra\n");
+		}
+	}
 }
 
 int 	main(int ac, char **av)
@@ -278,23 +331,35 @@ int 	main(int ac, char **av)
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
-
-	check_swap(a);
-	if(check_list(a, size))
-		return (0);
-	tmp = max_sequence(a);
-	tmp = get_prior(tmp, a);
-	to_stack_b(tmp, a, b, size);
-	sort_a(a);
-	while(b->size > 0)
+	int s;
+	s = check_list(a, size);
+	while (s == 0)
 	{
-		prior_b(a, b);
-		compound_ab(a, b);
+		check_swap(a);
+		rev_rotate(a);
+		a->command++;
+		ft_putstr("rra\n");
+		s = check_list(a, size);
 	}
 
+//	check_swap(a);
+//	if(check_list(a, size))
+//		return (0);
+//	tmp = max_sequence(a);
+//	tmp = get_prior(tmp, a);
+//	to_stack_b(tmp, a, b, size);
+//	sort_a(a);
+//	while(b->size > 0)
+//	{
+//		prior_b(a, b);
+//		compound_ab(a, b);
+//	}
+//	rotate_stack_a(a);
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
+	printf("\n%d\n", a->command);
+
 	printf("hahaha\n");
 	return (0);
 }

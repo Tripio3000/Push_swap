@@ -7,6 +7,9 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
+# include <limits.h>
+
+//#define INT_MAX 0xffffffff
 
 typedef struct 		s_data
 {
@@ -18,6 +21,7 @@ typedef struct 		s_data
 
 typedef struct 		s_stack
 {
+	size_t command;
 	size_t size;
 	t_data 	*head;
 	t_data 	*end;

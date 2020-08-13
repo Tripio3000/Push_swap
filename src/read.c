@@ -56,6 +56,7 @@ void 	init(t_stack *a, t_stack *b)
 	a->head = a->end = NULL;
 	b->size = 0;
 	b->head = b->end = NULL;
+	a->command = 0;
 }
 
 void 	pushBack(t_stack *src, int num)
