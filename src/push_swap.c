@@ -268,17 +268,79 @@ void 	prior_b(t_stack *a, t_stack *b)
 	}
 }
 
+int 	min_prior(t_stack *b)
+{
+	t_data *p;
+	int i;
+	int n;
+
+	p = b->head;
+	i = p->prior;
+	n = 0;
+	while(p != NULL)
+	{
+		if (i > p->prior)
+			i = p->prior;
+		p = p->next;
+	}
+	p = b->head;
+	while (i != p->prior)
+	{
+		n++;
+		p = p->next;
+	}
+	return (n);
+}
+
 void 	compound_ab(t_stack *a, t_stack *b)
 {
+	int n;
 	int i;
 
-	i = b->head->prior;
-	while (i > 0)
+	n = min_prior(b);
+	i = n;
+	if (n < (b->size / 2) && b->size > 1)
 	{
-		rotate(a);
-		a->command++;
-		ft_putstr("ra\n");
-		i--;
+		while (n > 0)
+		{
+			rotate(b);
+			a->command++;
+			ft_putstr("ra\n");
+			n--;
+		}
+	}
+	else
+	{
+		while (n < b->size && b->size > 1)
+		{
+			rev_rotate(b);
+			a->command++;
+			ft_putstr("rra\n");
+			n++;
+		}
+	}
+	b->head->prior -= i;
+	i = b->head->prior;
+	if (i < b->size / 2)
+	{
+		while (i > 0)
+		{
+			rotate(a);
+			a->command++;
+			ft_putstr("ra\n");
+			i--;
+		}
+	}
+	else
+	{
+		i = b->size - i;
+		while (i < b->size)
+		{
+			rev_rotate(a);
+			a->command++;
+			ft_putstr("rra\n");
+			i--;
+		}
 	}
 	push(b, a);
 	a->command++;
@@ -316,6 +378,27 @@ void 	rotate_stack_a(t_stack *a)
 	}
 }
 
+void	incr_prior(t_stack * b)
+{
+	int i;
+	t_data *p;
+
+	i = 0;
+	p = b->head;
+	while (p != NULL && i < (b->size / 2))
+	{
+		p->prior += i;
+		p = p->next;
+		i++;
+	}
+	while (p != NULL)
+	{
+		p->prior += i;
+		p = p->next;
+		i--;
+	}
+}
+
 int 	main(int ac, char **av)
 {
 	t_stack *a;
@@ -331,30 +414,24 @@ int 	main(int ac, char **av)
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
-	int s;
-	s = check_list(a, size);
-	while (s == 0)
-	{
-		check_swap(a);
-		rev_rotate(a);
-		a->command++;
-		ft_putstr("rra\n");
-		s = check_list(a, size);
-	}
+	check_swap(a);
+	if(check_list(a, size))
+		return (0);
+	tmp = max_sequence(a);
+	tmp = get_prior(tmp, a);
+	to_stack_b(tmp, a, b, size);
+	sort_a(a);
 
-//	check_swap(a);
-//	if(check_list(a, size))
-//		return (0);
-//	tmp = max_sequence(a);
-//	tmp = get_prior(tmp, a);
-//	to_stack_b(tmp, a, b, size);
-//	sort_a(a);
-//	while(b->size > 0)
-//	{
-//		prior_b(a, b);
-//		compound_ab(a, b);
-//	}
-//	rotate_stack_a(a);
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
+
+	while(b->size > 0)
+	{
+		prior_b(a, b);
+		incr_prior(b);
+		compound_ab(a, b);
+	}
+	rotate_stack_a(a);
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
