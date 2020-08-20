@@ -298,30 +298,33 @@ void 	compound_ab(t_stack *a, t_stack *b)
 	int i;
 
 	n = min_prior(b);
-	i = n;
-	if (n < (b->size / 2) && b->size > 1)
+	i = 0;
+	if (n <= (b->size / 2) && b->size > 1)
 	{
 		while (n > 0)
 		{
 			rotate(b);
 			a->command++;
-			ft_putstr("ra\n");
+			ft_putstr("rb\n");
 			n--;
+			i++;
 		}
 	}
 	else
 	{
+//		i = b->size - n;
 		while (n < b->size && b->size > 1)
 		{
 			rev_rotate(b);
 			a->command++;
-			ft_putstr("rra\n");
+			ft_putstr("rrb\n");
 			n++;
+			i++;
 		}
 	}
 	b->head->prior -= i;
 	i = b->head->prior;
-	if (i < b->size / 2)
+	if (i < a->size / 2)
 	{
 		while (i > 0)
 		{
@@ -333,13 +336,14 @@ void 	compound_ab(t_stack *a, t_stack *b)
 	}
 	else
 	{
-		i = b->size - i;
-		while (i < b->size)
+		i = a->size - b->head->prior;
+		i = a->size - i;
+		while (i < a->size)
 		{
 			rev_rotate(a);
 			a->command++;
 			ft_putstr("rra\n");
-			i--;
+			i++;
 		}
 	}
 	push(b, a);
@@ -385,12 +389,15 @@ void	incr_prior(t_stack * b)
 
 	i = 0;
 	p = b->head;
-	while (p != NULL && i < (b->size / 2))
+	while (p != NULL && i <= (b->size / 2))
 	{
 		p->prior += i;
 		p = p->next;
 		i++;
 	}
+	i--;
+	if (b->size % 2 == 0)
+		i--;
 	while (p != NULL)
 	{
 		p->prior += i;
@@ -422,21 +429,24 @@ int 	main(int ac, char **av)
 	to_stack_b(tmp, a, b, size);
 	sort_a(a);
 
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
+	print_stack(a, 'a');
+	print_stack(b, 'b');
 
 	while(b->size > 0)
 	{
 		prior_b(a, b);
 		incr_prior(b);
 		compound_ab(a, b);
+		print_stack(a, 'a');
+		print_stack(b, 'b');
 	}
 	rotate_stack_a(a);
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
 	printf("\n%d\n", a->command);
-
-	printf("hahaha\n");
+	int i = check_list(a, size);
+	if (i == 1)
+		printf("OK\n");
 	return (0);
 }
