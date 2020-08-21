@@ -406,6 +406,72 @@ void	incr_prior(t_stack * b)
 	}
 }
 
+void	simple_form(t_stack *a)
+{
+	int  *arr;
+	t_data *p;
+	int i;
+	int j;
+
+	arr = ft_memalloc(a->size + 1);
+	p = a->head;
+	i = 0;
+	while (p != NULL)
+	{
+		arr[i] = p->num;
+		p = p->next;
+		i++;
+	}
+
+//	i = 0;
+//	while (arr[i] != '\0')
+//	{
+//		printf("%d ", arr[i]);
+//		i++;
+//	}
+//	printf("\n\n");
+
+	i = 0;
+	while (arr[i + 1] != '\0')
+	{
+		if (arr[i] > arr[i + 1])
+		{
+			j = arr[i + 1];
+			arr[i + 1] = arr[i];
+			arr[i] = j;
+			i = 0;
+			continue ;
+		}
+		i++;
+	}
+
+	i = 0;
+	while (arr[i] != '\0')
+	{
+		printf("%d ", arr[i]);
+		i++;
+	}
+	printf("\n\n");
+
+	i = 0;
+	j = 0;
+	while (arr[i] != '\0')
+	{
+		p = a->head;
+		while (p != NULL)
+		{
+			if (arr[i] == p->num)
+			{
+				p->num = j;
+				j++;
+				break ;
+			}
+			p = p->next;
+		}
+		i++;
+	}
+}
+
 int 	main(int ac, char **av)
 {
 	t_stack *a;
@@ -421,26 +487,29 @@ int 	main(int ac, char **av)
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
-	check_swap(a);
+//	check_swap(a);
 	if(check_list(a, size))
 		return (0);
-	tmp = max_sequence(a);
-	tmp = get_prior(tmp, a);
-	to_stack_b(tmp, a, b, size);
-	sort_a(a);
 
-	print_stack(a, 'a');
-	print_stack(b, 'b');
+	simple_form(a);
 
-	while(b->size > 0)
-	{
-		prior_b(a, b);
-		incr_prior(b);
-		compound_ab(a, b);
-		print_stack(a, 'a');
-		print_stack(b, 'b');
-	}
-	rotate_stack_a(a);
+//	tmp = max_sequence(a);
+//	tmp = get_prior(tmp, a);
+//	to_stack_b(tmp, a, b, size);
+//	sort_a(a);
+//
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
+//
+//	while(b->size > 0)
+//	{
+//		prior_b(a, b);
+//		incr_prior(b);
+//		compound_ab(a, b);
+//		print_stack(a, 'a');
+//		print_stack(b, 'b');
+//	}
+//	rotate_stack_a(a);
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
