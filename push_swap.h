@@ -23,6 +23,7 @@ typedef struct 		s_stack
 {
 	size_t command;
 	size_t size;
+	size_t trig;
 	t_data 	*head;
 	t_data 	*end;
 }					t_stack;

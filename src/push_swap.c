@@ -42,7 +42,7 @@ void 	null_prior(t_stack *a)
 	}
 }
 
-t_data 	*max_sequence(t_stack *a)
+t_data 	*max_sequence_greather(t_stack *a)
 {
 	t_data *start;
 	t_data *p;
@@ -83,6 +83,47 @@ t_data 	*max_sequence(t_stack *a)
 			tmp = start;
 		}
 		null_prior(a);
+		start = start->next;
+	}
+	a->trig = max_prior;
+	return (tmp);
+}
+
+t_data	*max_sequence_index(t_stack *a)
+{
+	int max_prior;
+	int i;
+	int prior;
+	t_data *p1;
+	t_data *start;
+	t_data *tmp;
+
+	start = a->head;
+	max_prior = 0;
+	while (start != NULL)
+	{
+		i = start->num;
+		p1 = start->next;
+		prior = 0;
+		while (p1 != start)
+		{
+			if (p1 == NULL)
+				p1 = a->head;
+			if (p1->num - 1 == i)
+			{
+				prior++;
+				i = p1->num;
+			}
+			if (p1->next == NULL)
+				p1 = a->head;
+			else
+				p1 = p1->next;
+		}
+		if (max_prior < prior)
+		{
+			max_prior = prior;
+			tmp = start;
+		}
 		start = start->next;
 	}
 	return (tmp);
@@ -445,13 +486,13 @@ void	simple_form(t_stack *a)
 		i++;
 	}
 
-	i = 0;
-	while (arr[i] != '\0')
-	{
-		printf("%d ", arr[i]);
-		i++;
-	}
-	printf("\n\n");
+//	i = 0;
+//	while (arr[i] != '\0')
+//	{
+//		printf("%d ", arr[i]);
+//		i++;
+//	}
+//	printf("\n\n");
 
 	i = 0;
 	j = 0;
@@ -470,6 +511,14 @@ void	simple_form(t_stack *a)
 		}
 		i++;
 	}
+	p = a->head;
+	printf("a: ");
+	while (p != NULL)
+	{
+		printf("%d ", p->num);
+		p = p->next;
+	}
+	printf("\n\n");
 }
 
 int 	main(int ac, char **av)
@@ -485,22 +534,25 @@ int 	main(int ac, char **av)
 	create_stack(a, ac, av);
 	size = a->size;
 
-	print_stack(a, 'a');
-	print_stack(b, 'b');
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
 //	check_swap(a);
 	if(check_list(a, size))
 		return (0);
 
 	simple_form(a);
 
-//	tmp = max_sequence(a);
+//	tmp = max_sequence_greather(a);
+
+	tmp = max_sequence_index(a);
+
 //	tmp = get_prior(tmp, a);
 //	to_stack_b(tmp, a, b, size);
 //	sort_a(a);
-//
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
-//
+
+	print_stack(a, 'a');
+	print_stack(b, 'b');
+
 //	while(b->size > 0)
 //	{
 //		prior_b(a, b);
@@ -510,12 +562,13 @@ int 	main(int ac, char **av)
 //		print_stack(b, 'b');
 //	}
 //	rotate_stack_a(a);
+//
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
+//	printf("\n%d\n", a->command);
+//	int i = check_list(a, size);
+//	if (i == 1)
+//		printf("OK\n");
 
-	print_stack(a, 'a');
-	print_stack(b, 'b');
-	printf("\n%d\n", a->command);
-	int i = check_list(a, size);
-	if (i == 1)
-		printf("OK\n");
 	return (0);
 }
