@@ -2,8 +2,10 @@ FLAGS = -Wall -Wextra -Werror
 
 FILES_P = src/push_swap.c \
 			src/read.c \
+			src/operators.c \
 FILES_C = src/checker.c \
 			src/read.c \
+			src/operators.c \
 			gnl/get_next_line.c \
 
 
@@ -15,17 +17,24 @@ INCLUDES = push_swap.h
 NAME_C = checker
 NAME_P = push_swap
 
-OBJ = $(patsubst %.c,%.o,$(FILES_C))
+OBJ = $(patsubst %.c,%.o,$(FILES_C)$(FILES_P)$(LIBSRC))
 # OBJ = $(FILES_C:.c=.o)
 
 .PHONY: clean all fclean re
 
-all : $(OBJ)
-	@make -C $(LIBSRC)
-	@gcc -o $(NAME_C) $(FILES_C) -I $(INCLUDES) $(LIB)
-	@gcc -o $(NAME_P) $(FILES_P) -I $(INCLUDES) $(LIB)
+all : $(NAME_P) $(NAME_C)
 
-%.o: %.c $(INCLUDES)
+$(NAME_P) : $(OBJ)
+	@make -C $(LIBSRC)
+	@cc -o $(NAME_P) $(FILES_P) -I $(INCLUDES) $(LIB) -g
+
+$(NAME_C) : $(OBJ)
+	@cc -o $(NAME_C) $(FILES_C) -I $(INCLUDES) $(LIB) -g
+
+%.o: %.c $(INCLUDES) libft/libft.h
+	cc -I $(INCLUDES) $< -c -o $@ -g
+
+# %.o: %.c $(INCLUDES)
 
 clean :
 	@rm -rf $(OBJ)

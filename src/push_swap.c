@@ -242,7 +242,7 @@ void 	sort_a(t_stack *a)
 	}
 }
 
-t_data	*get_min(t_stack *src)
+t_data	*get_min(t_stack *src) //находим минимальное число в стеке
 {
 	t_data *p;
 	t_data *tmp;
@@ -436,7 +436,7 @@ void 	rotate_stack_a(t_stack *a)
 	}
 }
 
-void	incr_prior(t_stack * b)
+void	incr_prior(t_stack *b)
 {
 	int i;
 	t_data *p;
