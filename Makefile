@@ -3,6 +3,7 @@ FLAGS = -Wall -Wextra -Werror
 FILES_P = src/push_swap.c \
 			src/read.c \
 			src/operators.c \
+
 FILES_C = src/checker.c \
 			src/read.c \
 			src/operators.c \
@@ -17,7 +18,7 @@ INCLUDES = push_swap.h
 NAME_C = checker
 NAME_P = push_swap
 
-OBJ = $(patsubst %.c,%.o,$(FILES_C)$(FILES_P)$(LIBSRC))
+OBJ = $(patsubst %.c,%.o,$(FILES_C)$(FILES_P))
 # OBJ = $(FILES_C:.c=.o)
 
 .PHONY: clean all fclean re
