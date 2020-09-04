@@ -89,45 +89,55 @@ t_data 	*max_sequence_greather(t_stack *a)
 	return (tmp);
 }
 
-t_data	*max_sequence_index(t_stack *a)
-{
-	int max_prior;
-	int i;
-	int prior;
-	t_data *p1;
-	t_data *start;
-	t_data *tmp;
-
-	start = a->head;
-	max_prior = 0;
-	while (start != NULL)
-	{
-		i = start->num;
-		p1 = start->next;
-		prior = 0;
-		while (p1 != start)
-		{
-			if (p1 == NULL)
-				p1 = a->head;
-			if (p1->num - 1 == i)
-			{
-				prior++;
-				i = p1->num;
-			}
-			if (p1->next == NULL)
-				p1 = a->head;
-			else
-				p1 = p1->next;
-		}
-		if (max_prior < prior)
-		{
-			max_prior = prior;
-			tmp = start;
-		}
-		start = start->next;
-	}
-	return (tmp);
-}
+//t_data	*max_sequence_index(t_stack *a, t_data *prev)
+//{
+//	int max_prior;
+//	int i;
+//	int prior;
+//	t_data *p1;
+//	t_data *start;
+//	t_data *tmp;
+//
+//	start = a->head;
+//	max_prior = 0;
+//	while (start != NULL)
+//	{
+//		i = start->num;
+//		p1 = start->next;
+//		prior = 0;
+//		while (p1 != start)
+//		{
+//			if (p1 == NULL)
+//				p1 = a->head;
+//			if (p1->num - 1 == i)
+//			{
+//				prior++;
+//				i = p1->num;
+//			}
+//			if (p1->next == NULL)
+//				p1 = a->head;
+//			else
+//				p1 = p1->next;
+//		}
+//		if (max_prior < prior)
+//		{
+//			max_prior = prior;
+//			tmp = start;
+//		}
+//		start = start->next;
+//	}
+//	printf("greather: %d, index: %d\n", a->trig, max_prior);
+//	if (a->trig > max_prior)
+//	{
+//		a->trig = 0;
+//		return (prev);
+//	}
+//	else
+//	{
+//		a->trig = 1;
+//		return (tmp);
+//	}
+//}
 
 void 	to_stack_b(t_data *tmp, t_stack *a, t_stack *b, int size)
 {
@@ -158,21 +168,24 @@ void 	to_stack_b(t_data *tmp, t_stack *a, t_stack *b, int size)
 	}
 }
 
-void	check_swap(t_stack *a)
+int	check_swap(t_stack *a)
 {
 	t_data *p;
 
 	p = a->head;
 	p = p->next;
 	if (a->head->num > p->num)
-	{
-		swap(a);
-		a->command++;
-		ft_putstr("sa\n");
-	}
+		return (1);
+	else
+		return (0);
+//	{
+//		swap(a);
+//		a->command++;
+//		ft_putstr("sa\n");
+//	}
 }
 
-t_data	*get_prior(t_data *tmp, t_stack *a)
+t_data	*get_prior_greather(t_data *tmp, t_stack *a)
 {
 	int prior;
 	t_data *p;
@@ -192,7 +205,7 @@ t_data	*get_prior(t_data *tmp, t_stack *a)
 			if (num < p->num)
 			{
 				num = p->num;
-				p->prior = ++prior;
+				p->prior = prior;
 			}
 			p = p->next;
 		}
@@ -521,12 +534,28 @@ void	simple_form(t_stack *a)
 	printf("\n\n");
 }
 
+int 	exit_cycle(t_stack *a)
+{
+	t_data *p;
+
+	p = a->head;
+	while (p != NULL)
+	{
+		if (p->prior == 0)
+			return (0);
+		p = p->next;
+	}
+	return (1);
+}
+
 int 	main(int ac, char **av)
 {
 	t_stack *a;
 	t_stack *b;
 	t_data *tmp;
+	t_data *p;
 	int size;
+	int i;
 
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
@@ -534,41 +563,83 @@ int 	main(int ac, char **av)
 	create_stack(a, ac, av);
 	size = a->size;
 
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
-//	check_swap(a);
+	print_stack(a, 'a');
+	print_stack(b, 'b');
+	check_swap(a);
 	if(check_list(a, size))
 		return (0);
 
 	simple_form(a);
 
+//	a->trig == 0 => greater, else index.
+//	tmp = max_sequence_index(a, tmp);
+
 //	tmp = max_sequence_greather(a);
-
-	tmp = max_sequence_index(a);
-
-//	tmp = get_prior(tmp, a);
-//	to_stack_b(tmp, a, b, size);
-//	sort_a(a);
+//	tmp = get_prior_greather(tmp, a);
+//	p = a->head;
+//	while (p != NULL)
+//	{
+//		if (p->prior == 0)
+//			i++;
+//		p = p->next;
+//	}
+//	p = a->head;
+//	while (1)
+//	{
+//		i = exit_cycle(a);
+//		if (i == 1)
+//			break ;
+//		if (check_swap(a) == 1)
+//		{
+//			swap(a);
+//			ft_putstr("sa\n");
+//			a->command++;
+//			tmp = max_sequence_greather(a);
+//			tmp = get_prior_greather(tmp, a);
+//			p = a->head;
+//		}
+//		else if (p->prior == 0)
+//		{
+//			push(a, b);
+//			ft_putstr("pb\n");
+//			a->command++;
+//			i--;
+//		}
+//		else
+//		{
+//			rotate(a);
+//			ft_putstr("ra\n");
+//			a->command++;
+//		}
+//		print_stack(a, 'a');
+//		print_stack(b, 'b');
+//	}
+	tmp = max_sequence_greather(a);
+	tmp = get_prior_greather(tmp, a);
+	to_stack_b(tmp, a, b, size);
+	sort_a(a);
 
 	print_stack(a, 'a');
 	print_stack(b, 'b');
 
-//	while(b->size > 0)
-//	{
-//		prior_b(a, b);
-//		incr_prior(b);
-//		compound_ab(a, b);
-//		print_stack(a, 'a');
-//		print_stack(b, 'b');
-//	}
-//	rotate_stack_a(a);
-//
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
-//	printf("\n%d\n", a->command);
-//	int i = check_list(a, size);
-//	if (i == 1)
-//		printf("OK\n");
+	while(b->size > 0)
+	{
+		prior_b(a, b);
+		incr_prior(b);
+		compound_ab(a, b);
+		print_stack(a, 'a');
+		print_stack(b, 'b');
+	}
+	rotate_stack_a(a);
+
+	print_stack(a, 'a');
+	print_stack(b, 'b');
+	printf("\n%d\n", a->command);
+	int k = check_list(a, size);
+	if (k == 1)
+		printf("OK\n");
 
 	return (0);
 }
+
+// 159, -115, -47, -52, 11, 158, -141, 131, 92, 17, 49, -99
