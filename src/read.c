@@ -13,7 +13,8 @@ void 	print_stack(t_stack *list, char a)
 		ft_putchar(' ');
 		p = p->next;
 	}
-	printf("\n");
+	write (1, "\n", 1);
+//	printf("\n");
 }
 
 char 	**ft_split(char *str)

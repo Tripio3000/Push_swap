@@ -168,21 +168,21 @@ void 	to_stack_b(t_data *tmp, t_stack *a, t_stack *b, int size)
 	}
 }
 
-int	check_swap(t_stack *a)
+void	check_swap(t_stack *a)
 {
 	t_data *p;
 
 	p = a->head;
 	p = p->next;
 	if (a->head->num > p->num)
-		return (1);
-	else
-		return (0);
-//	{
-//		swap(a);
-//		a->command++;
-//		ft_putstr("sa\n");
-//	}
+//		return (1);
+//	else
+//		return (0);
+	{
+		swap(a);
+		a->command++;
+		ft_putstr("sa\n");
+	}
 }
 
 t_data	*get_prior_greather(t_data *tmp, t_stack *a)
@@ -402,7 +402,7 @@ void 	compound_ab(t_stack *a, t_stack *b)
 	}
 	push(b, a);
 	a->command++;
-	ft_putstr("pb\n");
+	ft_putstr("pa\n");
 }
 
 void 	rotate_stack_a(t_stack *a)
@@ -525,6 +525,7 @@ void	simple_form(t_stack *a)
 		i++;
 	}
 	p = a->head;
+
 	printf("a: ");
 	while (p != NULL)
 	{
@@ -563,13 +564,14 @@ int 	main(int ac, char **av)
 	create_stack(a, ac, av);
 	size = a->size;
 
-	print_stack(a, 'a');
-	print_stack(b, 'b');
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
+
 	check_swap(a);
 	if(check_list(a, size))
 		return (0);
 
-	simple_form(a);
+//	simple_form(a);
 
 //	a->trig == 0 => greater, else index.
 //	tmp = max_sequence_index(a, tmp);
@@ -619,25 +621,25 @@ int 	main(int ac, char **av)
 	to_stack_b(tmp, a, b, size);
 	sort_a(a);
 
-	print_stack(a, 'a');
-	print_stack(b, 'b');
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
 
 	while(b->size > 0)
 	{
 		prior_b(a, b);
 		incr_prior(b);
 		compound_ab(a, b);
-		print_stack(a, 'a');
-		print_stack(b, 'b');
+//		print_stack(a, 'a');
+//		print_stack(b, 'b');
 	}
 	rotate_stack_a(a);
 
-	print_stack(a, 'a');
-	print_stack(b, 'b');
-	printf("\n%d\n", a->command);
-	int k = check_list(a, size);
-	if (k == 1)
-		printf("OK\n");
+//	print_stack(a, 'a');
+//	print_stack(b, 'b');
+//	printf("\n%d\n", a->command);
+//	int k = check_list(a, size);
+//	if (k == 1)
+//		printf("OK\n");
 
 	return (0);
 }

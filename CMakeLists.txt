@@ -68,6 +68,6 @@ add_executable(push_swap
         gnl/get_next_line.c
         gnl/get_next_line.h
 #        src/checker.c
+		src/push_swap.c
         push_swap.h
-        src/push_swap.c
         src/read.c src/operators.c)

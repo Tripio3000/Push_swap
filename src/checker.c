@@ -45,11 +45,12 @@ void	ascending_order(t_stack *a, int size)
 	t_data *p1;
 	t_data *p2;
 
-	if (a->size != size)
-	{
-		ft_putstr("KO\n");
-		return ;
-	}
+//	printf("%d %d\n", a->size, size);
+//	if (a->size != size)
+//	{
+//		ft_putstr("KO\n");
+//		return ;
+//	}
 	i = 0;
 	p1 = a->head;
 	p2 = p1->next;
@@ -63,7 +64,7 @@ void	ascending_order(t_stack *a, int size)
 		}
 		else
 		{
-			ft_putstr("KO\n");
+			ft_putstr("KKO\n");
 			return ;
 		}
 	}
@@ -75,8 +76,12 @@ void 	std_input(t_stack *a, t_stack *b, int size)
 {
 	char *arr;
 
+	int i = 0;
 	while(get_next_line(0, &arr) > 0)
 	{
+		i++;
+//		if (i == 28)
+//			printf("d");
 		if (ft_strcmp(arr, "sa") == 0 ||
 			ft_strcmp(arr, "sb") == 0 ||
 			ft_strcmp(arr, "ss") == 0)
@@ -100,7 +105,11 @@ void 	std_input(t_stack *a, t_stack *b, int size)
 		if (ft_strcmp(arr, "ra") == 0 ||
 			ft_strcmp(arr, "rb") == 0 ||
 			ft_strcmp(arr, "rr") == 0)
+		{
 			rotation(arr, a, b);
+//			print_stack(a, 'a');
+//			print_stack(b, 'b');
+		}
 	}
 	ascending_order(a, size);
 }
