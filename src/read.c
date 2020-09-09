@@ -62,7 +62,9 @@ void 	init(t_stack *a, t_stack *b)
 
 void 	pushBack(t_stack *src, int num)
 {
-	t_data *tmp = (t_data *)malloc(sizeof(t_data));
+	t_data *tmp;
+
+	tmp = (t_data *)malloc(sizeof(t_data));
 	tmp->num = num;
 	tmp->next = NULL;
 	tmp->prev = src->end;
@@ -94,5 +96,12 @@ void	create_stack(t_stack *a, int ac, char **av)
 			j++;
 		}
 		i++;
+		j = 0;
+		while (mas[j] != 0)
+		{
+			ft_memdel((void *)(&mas[j]));
+			j++;
+		}
+		ft_memdel((void *)&mas);
 	}
 }

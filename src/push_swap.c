@@ -549,6 +549,61 @@ int 	exit_cycle(t_stack *a)
 	return (1);
 }
 
+void 	three_elem(t_stack *a)
+{
+	t_data *p1;
+	t_data *p2;
+	t_data *p3;
+
+	p1 = a->head;
+	p2 = p1->next;
+	p3 = a->end;
+	if (p1->num > p2->num && p2->num > p3->num && p3->num < p1->num)
+	{
+		swap(a);
+		ft_putstr("sa\n");
+		rev_rotate(a);
+		ft_putstr("rra\n");
+		a->command += 2;
+	}
+	else if (p1->num > p2->num && p2->num < p3->num && p3->num < p1->num)
+	{
+		rotate(a);
+		ft_putstr("ra\n");
+		a->command++;
+	}
+	else if (p1->num < p2->num && p2->num > p3->num && p3->num > p1->num)
+	{
+		swap(a);
+		ft_putstr("sa\n");
+		rotate(a);
+		ft_putstr("ra\n");
+		a->command += 2;
+	}
+	else if (p1->num < p2->num && p2->num > p3->num && p3->num < p1->num)
+	{
+		rev_rotate(a);
+		ft_putstr("rra\n");
+		a->command++;
+	}
+	else if (p1->num > p2->num && p2->num < p3->num && p3->num > p1->num)
+	{
+		swap(a);
+		ft_putstr("sa\n");
+		a->command++;
+	}
+}
+
+void 	five_elem(t_stack *a, t_stack *b)
+{
+	push(a, b);
+	ft_putstr("pb\n");
+	push(a, b);
+	ft_putstr("pb\n");
+	a->command += 2;
+	three_elem(a);
+}
+
 int 	main(int ac, char **av)
 {
 	t_stack *a;
@@ -567,59 +622,25 @@ int 	main(int ac, char **av)
 //	print_stack(a, 'a');
 //	print_stack(b, 'b');
 
-	check_swap(a);
+	if (size == 3)
+		three_elem(a);
+	else
+		check_swap(a);
 	if(check_list(a, size))
 		return (0);
 
 //	simple_form(a);
 
-//	a->trig == 0 => greater, else index.
-//	tmp = max_sequence_index(a, tmp);
+	if (size == 5)
+		five_elem(a, b);
+	else
+	{
+		tmp = max_sequence_greather(a);
+		tmp = get_prior_greather(tmp, a);
+		to_stack_b(tmp, a, b, size);
+		sort_a(a);
+	}
 
-//	tmp = max_sequence_greather(a);
-//	tmp = get_prior_greather(tmp, a);
-//	p = a->head;
-//	while (p != NULL)
-//	{
-//		if (p->prior == 0)
-//			i++;
-//		p = p->next;
-//	}
-//	p = a->head;
-//	while (1)
-//	{
-//		i = exit_cycle(a);
-//		if (i == 1)
-//			break ;
-//		if (check_swap(a) == 1)
-//		{
-//			swap(a);
-//			ft_putstr("sa\n");
-//			a->command++;
-//			tmp = max_sequence_greather(a);
-//			tmp = get_prior_greather(tmp, a);
-//			p = a->head;
-//		}
-//		else if (p->prior == 0)
-//		{
-//			push(a, b);
-//			ft_putstr("pb\n");
-//			a->command++;
-//			i--;
-//		}
-//		else
-//		{
-//			rotate(a);
-//			ft_putstr("ra\n");
-//			a->command++;
-//		}
-//		print_stack(a, 'a');
-//		print_stack(b, 'b');
-//	}
-	tmp = max_sequence_greather(a);
-	tmp = get_prior_greather(tmp, a);
-	to_stack_b(tmp, a, b, size);
-	sort_a(a);
 
 //	print_stack(a, 'a');
 //	print_stack(b, 'b');
@@ -641,6 +662,16 @@ int 	main(int ac, char **av)
 //	if (k == 1)
 //		printf("OK\n");
 
+
+	p = a->head;
+	while (p != NULL)
+	{
+		tmp = p->next;
+		ft_memdel((void *)&p);
+		p = tmp;
+	}
+	ft_memdel((void *)&a);
+	ft_memdel((void *)&b);
 	return (0);
 }
 
