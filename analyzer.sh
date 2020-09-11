@@ -90,3 +90,5 @@ echo "The average is :\t\x1b[33m$MOY\x1b[0m"
 echo "The smallest is :\x1B[32m$MIN\x1b[0m"
 echo "The worst list :\t$ACTMAX"
 echo "The best list :\t\t$ACTMIN"
+
+#valgrind --leak-check=full ./push_swap $ARG | grep "definitely lost:" | valgrind --leak-check=full ./checker $ARG | grep "definitely lost:"

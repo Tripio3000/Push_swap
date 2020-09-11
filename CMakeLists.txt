@@ -67,7 +67,9 @@ add_executable(push_swap
         libft/libft.h
         gnl/get_next_line.c
         gnl/get_next_line.h
-#        src/checker.c
-		src/push_swap.c
+        src/checker.c
+#		src/push_swap.c
         push_swap.h
-        src/read.c src/operators.c)
+        src/read.c
+		src/operators.c
+		src/help_func.c)

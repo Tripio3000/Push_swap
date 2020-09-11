@@ -85,7 +85,7 @@ t_data 	*max_sequence_greather(t_stack *a)
 		null_prior(a);
 		start = start->next;
 	}
-	a->trig = max_prior;
+//	a->trig = max_prior;
 	return (tmp);
 }
 
@@ -613,9 +613,11 @@ int 	main(int ac, char **av)
 	int size;
 	int i;
 
+	if (ac < 2)
+		exit(0);
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
-	init(a, b);
+	ft_init(a, b);
 	create_stack(a, ac, av);
 	size = a->size;
 
@@ -627,7 +629,11 @@ int 	main(int ac, char **av)
 	else
 		check_swap(a);
 	if(check_list(a, size))
+	{
+		ft_freee(a, b);
 		return (0);
+	}
+
 
 //	simple_form(a);
 
@@ -663,15 +669,8 @@ int 	main(int ac, char **av)
 //		printf("OK\n");
 
 
-	p = a->head;
-	while (p != NULL)
-	{
-		tmp = p->next;
-		ft_memdel((void *)&p);
-		p = tmp;
-	}
-	ft_memdel((void *)&a);
-	ft_memdel((void *)&b);
+	ft_freee(a, b);
+//	ft_printf("ahahah");
 	return (0);
 }
 

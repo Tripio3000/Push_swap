@@ -46,11 +46,11 @@ void	ascending_order(t_stack *a, int size)
 	t_data *p2;
 
 //	printf("%d %d\n", a->size, size);
-//	if (a->size != size)
-//	{
-//		ft_putstr("KO\n");
-//		return ;
-//	}
+	if (a->size != size)
+	{
+		ft_putstr("KO\n");
+		return ;
+	}
 	i = 0;
 	p1 = a->head;
 	p2 = p1->next;
@@ -71,45 +71,48 @@ void	ascending_order(t_stack *a, int size)
 	ft_putstr("OK\n");
 }
 
+void 	check_command(char *arr)
+{
+	if (ft_strcmp(arr, "sa") != 0 && ft_strcmp(arr, "sb") != 0 &&
+		ft_strcmp(arr, "ss") != 0 && ft_strcmp(arr, "pb") != 0 &&
+		ft_strcmp(arr, "pa") != 0 && ft_strcmp(arr, "rra") != 0 &&
+		ft_strcmp(arr, "rrb") != 0 && ft_strcmp(arr, "rrr") != 0 &&
+		ft_strcmp(arr, "ra") != 0 && ft_strcmp(arr, "rb") != 0 &&
+		ft_strcmp(arr, "rr") != 0)
+		error();
+}
+
 //		ЧТЕНИЕ СТАНДАРТНОГО ВВОДА
 void 	std_input(t_stack *a, t_stack *b, int size)
 {
 	char *arr;
 
-	int i = 0;
+//	int i = 0;
+	if (a->v == 1)
+		print_stack(a, b);
 	while(get_next_line(0, &arr) > 0)
 	{
-		i++;
-//		if (i == 28)
-//			printf("d");
+		check_command(arr);
 		if (ft_strcmp(arr, "sa") == 0 ||
 			ft_strcmp(arr, "sb") == 0 ||
 			ft_strcmp(arr, "ss") == 0)
 			swapper(arr, a, b);
-		if (ft_strcmp(arr, "pb") == 0 && a->head != NULL)
-		{
+		else if (ft_strcmp(arr, "pb") == 0 && a->head != NULL)
 			push(a, b);
-//			print_stack(a, 'a');
-//			print_stack(b, 'b');
-		}
-		if (ft_strcmp(arr, "pa") == 0 && b->head != NULL)
-		{
+		else if (ft_strcmp(arr, "pa") == 0 && b->head != NULL)
 			push(b, a);
-//			print_stack(a, 'a');
-//			print_stack(b, 'b');
-		}
-		if (ft_strcmp(arr, "rra") == 0 ||
+		else if (ft_strcmp(arr, "rra") == 0 ||
 			ft_strcmp(arr, "rrb") == 0 ||
 			ft_strcmp(arr, "rrr") == 0)
 			rev_rotation(arr, a, b);
-		if (ft_strcmp(arr, "ra") == 0 ||
+		else if (ft_strcmp(arr, "ra") == 0 ||
 			ft_strcmp(arr, "rb") == 0 ||
 			ft_strcmp(arr, "rr") == 0)
-		{
 			rotation(arr, a, b);
-//			print_stack(a, 'a');
-//			print_stack(b, 'b');
-		}
+//		else
+//			error();
+		if (a->v == 1)
+			print_stack(a, b);
 	}
 	ascending_order(a, size);
 }
@@ -121,18 +124,18 @@ int 	main(int ac, char **av)
 	t_stack *b;
 	int size;
 
+	if (ac < 2)
+		exit(0);
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
-	init(a, b);
+	ft_init(a, b);
+	if (ft_strcmp(av[1], "-v") == 0)
+		a->v = 1;
 	create_stack(a, ac, av);
 	size = a->size;
 
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
-
-//	if (ft_strcmp(av[0], "./a.out") == 0)
 	std_input(a, b, size);
-//	else
-//		push_swap(a, b);
+	ft_freee(a, b);
+//	ft_printf("asdf");
 	return (0);
 }
