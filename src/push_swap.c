@@ -1,9 +1,9 @@
 # include "../push_swap.h"
 
-void 	push_swap(t_stack *a, t_stack *b)
-{
-	printf("hahaha\n");
-}
+//void 	push_swap(t_stack *a, t_stack *b)
+//{
+//	printf("hahaha\n");
+//}
 
 int 	check_list(t_stack *a, int size)
 {
@@ -613,7 +613,7 @@ int 	main(int ac, char **av)
 	int size;
 	int i;
 
-	if (ac < 2)
+	if (ac < 3)
 		exit(0);
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
@@ -670,8 +670,9 @@ int 	main(int ac, char **av)
 
 
 	ft_freee(a, b);
-//	ft_printf("ahahah");
 	return (0);
 }
+
+// сега с одним аргументом  в пуш свапе 
 
 // 159, -115, -47, -52, 11, 158, -141, 131, 92, 17, 49, -99

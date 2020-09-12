@@ -90,7 +90,7 @@ void 	std_input(t_stack *a, t_stack *b, int size)
 //	int i = 0;
 	if (a->v == 1)
 		print_stack(a, b);
-	while(get_next_line(0, &arr) > 0)
+	while (get_next_line(0, &arr) > 0)
 	{
 		check_command(arr);
 		if (ft_strcmp(arr, "sa") == 0 ||
@@ -113,6 +113,7 @@ void 	std_input(t_stack *a, t_stack *b, int size)
 //			error();
 		if (a->v == 1)
 			print_stack(a, b);
+		ft_memdel((void *)(&arr));
 	}
 	ascending_order(a, size);
 }

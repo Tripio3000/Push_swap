@@ -35,7 +35,7 @@ long long	ft_atoi_long(const char *nptr);
 void 	error(void);
 void 				pushBack(t_stack *src, int num);
 void				create_stack(t_stack *a, int ac, char **av);
-void 	print_stack(t_stack *a, t_stack *b); 			//УДАЛИТЬ
+void 	print_stack(t_stack *a, t_stack *b);
 void 				swap(t_stack *a);
 //void 				swapper(char *arr, t_stack *a, t_stack *b);
 void 				push1(t_data *p1, t_stack *b);

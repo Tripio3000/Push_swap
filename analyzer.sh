@@ -50,6 +50,11 @@ do
 	ARG=`ruby -e "puts ($NBRBOT..$NBRTOP).to_a.shuffle.join(' ')"`
 	NBRCOUP=$(./push_swap $ARG | wc -l);
 	TEST=$(./push_swap $ARG | ./checker $ARG);
+#	echo "aaaa"
+#  valgrind ./push_swap $ARG > test 2>&1 | grep -w 'definitely'
+#  echo "aaaa"
+#  valgrind ./checker $ARG > test 2>&1 | grep -w 'definitely'
+#  echo "aaaa"
 	if [ $TEST = "OK" ]
 	then
 		printf "\033[0;32m▓\033[0;0m"
@@ -91,4 +96,4 @@ echo "The smallest is :\x1B[32m$MIN\x1b[0m"
 echo "The worst list :\t$ACTMAX"
 echo "The best list :\t\t$ACTMIN"
 
-#valgrind --leak-check=full ./push_swap $ARG | grep "definitely lost:" | valgrind --leak-check=full ./checker $ARG | grep "definitely lost:"
+#valgrind ./push_swap $ARG | grep "definitely lost:" | valgrind ./checker $ARG | grep "definitely lost:"
