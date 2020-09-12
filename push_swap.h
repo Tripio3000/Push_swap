@@ -33,7 +33,7 @@ char 				**ft_split(char *str);
 void 				ft_freee(t_stack *a, t_stack *b);
 long long	ft_atoi_long(const char *nptr);
 void 	error(void);
-void 				pushBack(t_stack *src, int num);
+void 				push_back(t_stack *src, int num);
 void				create_stack(t_stack *a, int ac, char **av);
 void 	print_stack(t_stack *a, t_stack *b);
 void 				swap(t_stack *a);

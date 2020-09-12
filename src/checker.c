@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cseabass <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 20:43:36 by cseabass          #+#    #+#             */
+/*   Updated: 2020/09/12 20:43:38 by cseabass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void 	swapper(char *arr, t_stack *a, t_stack *b)
+void	swapper(char *arr, t_stack *a, t_stack *b)
 {
 	if ((ft_strcmp(arr, "sa") == 0 || ft_strcmp(arr, "ss") == 0) &&
 		a->head != NULL && a->head->next != NULL)
@@ -8,12 +20,9 @@ void 	swapper(char *arr, t_stack *a, t_stack *b)
 	if ((ft_strcmp(arr, "sb") == 0 || ft_strcmp(arr, "ss") == 0) &&
 		b->head != NULL && b->head->next != NULL)
 		swap(b);
-
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
 }
 
-void 	rev_rotation(char *arr, t_stack *a, t_stack *b)
+void	rev_rotation(char *arr, t_stack *a, t_stack *b)
 {
 	if ((ft_strcmp(arr, "rra") == 0 || ft_strcmp(arr, "rrr") == 0) &&
 		a->head != NULL && a->head->next != NULL)
@@ -21,12 +30,9 @@ void 	rev_rotation(char *arr, t_stack *a, t_stack *b)
 	if ((ft_strcmp(arr, "rrb") == 0 || ft_strcmp(arr, "rrr") == 0) &&
 		b->head != NULL && b->head->next != NULL)
 		rev_rotate(b);
-
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
 }
 
-void 	rotation(char *arr, t_stack *a, t_stack *b)
+void	rotation(char *arr, t_stack *a, t_stack *b)
 {
 	if ((ft_strcmp(arr, "ra") == 0 || ft_strcmp(arr, "rr") == 0) &&
 		a->head != NULL && a->head->next != NULL)
@@ -34,9 +40,6 @@ void 	rotation(char *arr, t_stack *a, t_stack *b)
 	if ((ft_strcmp(arr, "rb") == 0 || ft_strcmp(arr, "rr") == 0) &&
 		b->head != NULL && b->head->next != NULL)
 		rotate(b);
-
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
 }
 
 void	ascending_order(t_stack *a, int size)
@@ -45,7 +48,6 @@ void	ascending_order(t_stack *a, int size)
 	t_data *p1;
 	t_data *p2;
 
-//	printf("%d %d\n", a->size, size);
 	if (a->size != size)
 	{
 		ft_putstr("KO\n");
@@ -71,7 +73,7 @@ void	ascending_order(t_stack *a, int size)
 	ft_putstr("OK\n");
 }
 
-void 	check_command(char *arr)
+void	check_command(char *arr)
 {
 	if (ft_strcmp(arr, "sa") != 0 && ft_strcmp(arr, "sb") != 0 &&
 		ft_strcmp(arr, "ss") != 0 && ft_strcmp(arr, "pb") != 0 &&
@@ -83,11 +85,10 @@ void 	check_command(char *arr)
 }
 
 //		ЧТЕНИЕ СТАНДАРТНОГО ВВОДА
-void 	std_input(t_stack *a, t_stack *b, int size)
+void	std_input(t_stack *a, t_stack *b, int size)
 {
 	char *arr;
 
-//	int i = 0;
 	if (a->v == 1)
 		print_stack(a, b);
 	while (get_next_line(0, &arr) > 0)
@@ -109,8 +110,6 @@ void 	std_input(t_stack *a, t_stack *b, int size)
 			ft_strcmp(arr, "rb") == 0 ||
 			ft_strcmp(arr, "rr") == 0)
 			rotation(arr, a, b);
-//		else
-//			error();
 		if (a->v == 1)
 			print_stack(a, b);
 		ft_memdel((void *)(&arr));
@@ -118,9 +117,8 @@ void 	std_input(t_stack *a, t_stack *b, int size)
 	ascending_order(a, size);
 }
 
-int 	main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	char *arr;
 	t_stack *a;
 	t_stack *b;
 	int size;
@@ -129,16 +127,12 @@ int 	main(int ac, char **av)
 		exit(0);
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
-//	ft_freee(a, b);
-//	return (0);
 	ft_init(a, b);
 	if (ft_strcmp(av[1], "-v") == 0)
 		a->v = 1;
 	create_stack(a, ac, av);
 	size = a->size;
-
 	std_input(a, b, size);
 	ft_freee(a, b);
-//	ft_printf("asdf");
 	return (0);
 }

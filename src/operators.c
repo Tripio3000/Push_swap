@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operators.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cseabass <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 21:07:09 by cseabass          #+#    #+#             */
+/*   Updated: 2020/09/12 21:07:11 by cseabass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void 	swap(t_stack *a)
+void	swap(t_stack *a)
 {
 	t_data *p1;
 	t_data *p2;
@@ -18,11 +30,9 @@ void 	swap(t_stack *a)
 	else
 		a->end = p1;
 	p1->prev = p2;
-
-//	print_stack(a);
 }
 
-void 	push1(t_data *p1, t_stack *b)
+void	push1(t_data *p1, t_stack *b)
 {
 	p1->prev = NULL;
 	p1->next = b->head;
@@ -34,7 +44,7 @@ void 	push1(t_data *p1, t_stack *b)
 	b->size++;
 }
 
-void 	push(t_stack *src, t_stack *dst)
+void	push(t_stack *src, t_stack *dst)
 {
 	t_data *p1;
 	t_data *p2;
@@ -45,7 +55,7 @@ void 	push(t_stack *src, t_stack *dst)
 		push1(p1, dst);
 		src->head = NULL;
 		src->size--;
-		return;
+		return ;
 	}
 	p2 = p1->next;
 	src->head = p2;
@@ -54,13 +64,10 @@ void 	push(t_stack *src, t_stack *dst)
 	push1(p1, dst);
 }
 
-void 	rotate(t_stack *src)
+void	rotate(t_stack *src)
 {
 	t_data *p1;
 	t_data *p2;
-
-//	ft_putstr("\nmas: ");
-//	print_stack(src);
 
 	p1 = src->head;
 	p2 = src->head->next;
@@ -73,18 +80,12 @@ void 	rotate(t_stack *src)
 		src->head = p1;
 	src->head = p2;
 	p2->prev = NULL;
-
-//	ft_putstr("\nrotmas: ");
-//	print_stack(src);
 }
 
-void 	rev_rotate(t_stack *src)
+void	rev_rotate(t_stack *src)
 {
 	t_data *p1;
 	t_data *p2;
-
-//	ft_putstr("\nmas: ");
-//	print_stack(src);
 
 	p1 = src->end;
 	p2 = src->end->prev;
@@ -97,7 +98,4 @@ void 	rev_rotate(t_stack *src)
 		src->end = p1;
 	src->end = p2;
 	p2->next = NULL;
-
-//	ft_putstr("\nrotmas: ");
-//	print_stack(src);
 }

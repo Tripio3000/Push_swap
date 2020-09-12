@@ -1,23 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cseabass <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/12 20:44:02 by cseabass          #+#    #+#             */
+/*   Updated: 2020/09/12 20:44:04 by cseabass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-//void 	print_stack(t_stack *list, char a)
-//{
-//	t_data *p;
-//
-//	p = list->head;
-//	ft_putchar(a);
-//	ft_putstr(": ");
-//	while (p != NULL)
-//	{
-//		ft_putnbr(p->num);
-//		ft_putchar(' ');
-//		p = p->next;
-//	}
-//	write (1, "\n", 1);
-////	printf("\n");
-//}
-
-void 	print_stack(t_stack *a, t_stack *b)
+void	print_stack(t_stack *a, t_stack *b)
 {
 	t_data *p1;
 	t_data *p2;
@@ -45,18 +40,12 @@ void 	print_stack(t_stack *a, t_stack *b)
 	ft_printf("+-------------+-------------+\n");
 }
 
-char 	**ft_split(char *str)
+char	**ft_split1(char *str, int i, int k)
 {
-	int i;
-	int j;
-	int k;
-	char **mas;
+	int		j;
+	char	**mas;
 
 	mas = (char **)malloc(sizeof(char *) * 1000);
-	k = 0;
-	i = 0;
-	while (str[i] < 32)
-		i++;
 	while (str[i] != '\0')
 	{
 		if (str[i] > 32)
@@ -79,20 +68,36 @@ char 	**ft_split(char *str)
 	return (mas);
 }
 
-void 	ft_init(t_stack *a, t_stack *b)
+char	**ft_split(char *str)
+{
+	int		i;
+	int		k;
+	char	**mas;
+
+	i = 0;
+	k = 0;
+	while (str[i] < 32)
+		i++;
+	mas = ft_split1(str, i, k);
+	return (mas);
+}
+
+void	ft_init(t_stack *a, t_stack *b)
 {
 	a->size = 0;
-	a->head = a->end = NULL;
+	a->head = NULL;
+	a->end = NULL;
 	b->size = 0;
-	b->head = b->end = NULL;
+	b->head = NULL;
+	b->end = NULL;
 	a->command = 0;
 	a->v = 0;
 	b->v = 0;
 }
 
-void 	pushBack(t_stack *src, int num)
+void	push_back(t_stack *src, int num)
 {
-	t_data *tmp;
+	t_data	*tmp;
 
 	tmp = (t_data *)malloc(sizeof(t_data));
 	tmp->num = num;
@@ -106,13 +111,13 @@ void 	pushBack(t_stack *src, int num)
 	src->size++;
 }
 
-void 	error(void)
+void	error(void)
 {
 	write(2, "Error\n", 6);
 	exit(0);
 }
 
-void 	check_valid(char **mas)
+void	check_valid(char **mas)
 {
 	int i;
 	int j;
@@ -125,7 +130,8 @@ void 	check_valid(char **mas)
 		j = 0;
 		while (mas[i][j] != '\0')
 		{
-			if ((mas[i][j] < '0' || mas[i][j] > '9') && mas[i][j] != '-' && mas[i][j] != '+')
+			if ((mas[i][j] < '0' || mas[i][j] > '9') &&
+				mas[i][j] != '-' && mas[i][j] != '+')
 				error();
 			j++;
 		}
@@ -133,11 +139,11 @@ void 	check_valid(char **mas)
 	}
 }
 
-void 	check_duplic(t_stack *a)
+void	check_duplic(t_stack *a)
 {
-	t_data *p1;
-	t_data *p2;
-	int i;
+	t_data	*p1;
+	t_data	*p2;
+	int		i;
 
 	p1 = a->head;
 	while (p1 != NULL)
@@ -152,16 +158,31 @@ void 	check_duplic(t_stack *a)
 		}
 		p1 = p1->next;
 	}
-
 }
 
-//		ЗАПОЛНЕНИЕ СПИСКА ЧИСЛАМИ ИЗ АРГУМЕНТА
+/*
+**	ЗАПОЛНЕНИЕ СПИСКА ЧИСЛАМИ ИЗ АРГУМЕНТА
+*/
+
+void	create_stack1(char **mas)
+{
+	int j;
+
+	j = 0;
+	while (mas[j] != 0)
+	{
+		ft_memdel((void *)(&mas[j]));
+		j++;
+	}
+	ft_memdel((void *)&mas);
+}
+
 void	create_stack(t_stack *a, int ac, char **av)
 {
-	int i;
-	int j;
-	long long num;
-	char **mas;
+	int			i;
+	int			j;
+	long long	num;
+	char		**mas;
 
 	i = 1;
 	if (a->v == 1)
@@ -176,27 +197,28 @@ void	create_stack(t_stack *a, int ac, char **av)
 			num = ft_atoi_long(mas[j]);
 			if (num > 2147483647 || num < -2147483648)
 				error();
-			pushBack(a, num);
+			push_back(a, num);
 			j++;
 		}
 		i++;
-		j = 0;
-		while (mas[j] != 0)
-		{
-			ft_memdel((void *)(&mas[j]));
-			j++;
-		}
-		ft_memdel((void *)&mas);
+		create_stack1(mas);
 	}
 	check_duplic(a);
 }
 
-void 	ft_freee(t_stack *a, t_stack *b)
+void	ft_freee(t_stack *a, t_stack *b)
 {
-	t_data *p;
-	t_data  *tmp;
+	t_data	*p;
+	t_data	*tmp;
 
 	p = a->head;
+	while (p != NULL)
+	{
+		tmp = p->next;
+		ft_memdel((void *)&p);
+		p = tmp;
+	}
+	p = b->head;
 	while (p != NULL)
 	{
 		tmp = p->next;

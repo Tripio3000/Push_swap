@@ -609,7 +609,7 @@ int 	main(int ac, char **av)
 	t_stack *a;
 	t_stack *b;
 	t_data *tmp;
-	t_data *p;
+
 	int size;
 	int i;
 
@@ -625,10 +625,6 @@ int 	main(int ac, char **av)
 		ft_freee(a, b);
 		return (0);
 	}
-
-//	print_stack(a, 'a');
-//	print_stack(b, 'b');
-
 	if (size == 3)
 		three_elem(a);
 	else
@@ -673,11 +669,6 @@ int 	main(int ac, char **av)
 //	if (k == 1)
 //		printf("OK\n");
 
-
 	ft_freee(a, b);
 	return (0);
 }
-
-// сега с одним аргументом  в пуш свапе 
-
-// 159, -115, -47, -52, 11, 158, -141, 131, 92, 17, 49, -99
