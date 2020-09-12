@@ -613,13 +613,18 @@ int 	main(int ac, char **av)
 	int size;
 	int i;
 
-	if (ac < 3)
+	if (ac < 2)
 		exit(0);
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
 	ft_init(a, b);
 	create_stack(a, ac, av);
 	size = a->size;
+	if (size < 2)
+	{
+		ft_freee(a, b);
+		return (0);
+	}
 
 //	print_stack(a, 'a');
 //	print_stack(b, 'b');

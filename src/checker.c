@@ -129,6 +129,8 @@ int 	main(int ac, char **av)
 		exit(0);
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
+//	ft_freee(a, b);
+//	return (0);
 	ft_init(a, b);
 	if (ft_strcmp(av[1], "-v") == 0)
 		a->v = 1;

@@ -49,7 +49,7 @@ while [ $IND -gt 0 ];
 do
 	ARG=`ruby -e "puts ($NBRBOT..$NBRTOP).to_a.shuffle.join(' ')"`
 	NBRCOUP=$(./push_swap $ARG | wc -l);
-	TEST=$(./push_swap $ARG | ./checker $ARG);
+	TEST=$(valgrind ./push_swap $ARG | valgrind ./checker $ARG);
 #	echo "aaaa"
 #  valgrind ./push_swap $ARG > test 2>&1 | grep -w 'definitely'
 #  echo "aaaa"
