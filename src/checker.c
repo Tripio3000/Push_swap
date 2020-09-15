@@ -42,17 +42,24 @@ void	rotation(char *arr, t_stack *a, t_stack *b)
 		rotate(b);
 }
 
-void	ascending_order(t_stack *a, int size)
+int		wrong_size(t_stack *a, int size)
 {
-	int i;
-	t_data *p1;
-	t_data *p2;
-
 	if (a->size != size)
 	{
 		ft_putstr("KO\n");
-		return ;
+		return (1);
 	}
+	return (0);
+}
+
+void	ascending_order(t_stack *a, int size)
+{
+	int		i;
+	t_data	*p1;
+	t_data	*p2;
+
+	if (wrong_size(a, size) == 1)
+		return ;
 	i = 0;
 	p1 = a->head;
 	p2 = p1->next;
@@ -66,7 +73,7 @@ void	ascending_order(t_stack *a, int size)
 		}
 		else
 		{
-			ft_putstr("KKO\n");
+			ft_putstr("KO\n");
 			return ;
 		}
 	}
@@ -84,7 +91,10 @@ void	check_command(char *arr)
 		error();
 }
 
-//		ЧТЕНИЕ СТАНДАРТНОГО ВВОДА
+/*
+** ЧТЕНИЕ СТАНДАРТНОГО ВВОДА
+*/
+
 void	std_input(t_stack *a, t_stack *b, int size)
 {
 	char *arr;
@@ -94,20 +104,17 @@ void	std_input(t_stack *a, t_stack *b, int size)
 	while (get_next_line(0, &arr) > 0)
 	{
 		check_command(arr);
-		if (ft_strcmp(arr, "sa") == 0 ||
-			ft_strcmp(arr, "sb") == 0 ||
+		if (ft_strcmp(arr, "sa") == 0 || ft_strcmp(arr, "sb") == 0 ||
 			ft_strcmp(arr, "ss") == 0)
 			swapper(arr, a, b);
 		else if (ft_strcmp(arr, "pb") == 0 && a->head != NULL)
 			push(a, b);
 		else if (ft_strcmp(arr, "pa") == 0 && b->head != NULL)
 			push(b, a);
-		else if (ft_strcmp(arr, "rra") == 0 ||
-			ft_strcmp(arr, "rrb") == 0 ||
+		else if (ft_strcmp(arr, "rra") == 0 || ft_strcmp(arr, "rrb") == 0 ||
 			ft_strcmp(arr, "rrr") == 0)
 			rev_rotation(arr, a, b);
-		else if (ft_strcmp(arr, "ra") == 0 ||
-			ft_strcmp(arr, "rb") == 0 ||
+		else if (ft_strcmp(arr, "ra") == 0 || ft_strcmp(arr, "rb") == 0 ||
 			ft_strcmp(arr, "rr") == 0)
 			rotation(arr, a, b);
 		if (a->v == 1)
@@ -119,9 +126,9 @@ void	std_input(t_stack *a, t_stack *b, int size)
 
 int		main(int ac, char **av)
 {
-	t_stack *a;
-	t_stack *b;
-	int size;
+	t_stack	*a;
+	t_stack	*b;
+	int		size;
 
 	if (ac < 2)
 		exit(0);
