@@ -137,6 +137,7 @@ int		main(int ac, char **av)
 	ft_init(a, b);
 	if (ft_strcmp(av[1], "-v") == 0)
 		a->v = 1;
+
 	create_stack(a, ac, av);
 	size = a->size;
 	std_input(a, b, size);

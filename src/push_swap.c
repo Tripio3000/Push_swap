@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../push_swap.h"
+#include "../push_swap.h"
 
 int		check_list(t_stack *a, int size)
 {
@@ -146,9 +146,9 @@ void	check_swap(t_stack *a)
 
 void	get_prior_greather(t_data *tmp, t_stack *a)
 {
-	int prior;
-	t_data *p;
-	int num;
+	int		prior;
+	t_data	*p;
+	int		num;
 
 	prior = 1;
 	p = tmp;
@@ -169,7 +169,6 @@ void	get_prior_greather(t_data *tmp, t_stack *a)
 			p = p->next;
 		}
 	}
-//	return (p);
 }
 
 void	sort_a1(t_stack *a)
@@ -181,8 +180,8 @@ void	sort_a1(t_stack *a)
 
 void	sort_a(t_stack *a)
 {
-	t_data *p;
-	int i;
+	t_data	*p;
+	int		i;
 
 	p = a->head;
 	i = 1;
@@ -193,7 +192,7 @@ void	sort_a(t_stack *a)
 	}
 	while (a->head->prior != 1)
 	{
-		if ((i - 1) < (a->size  - (i - 1)))
+		if ((i - 1) < (a->size - (i - 1)))
 		{
 			rotate(a);
 			a->command++;
@@ -210,9 +209,9 @@ void	sort_a(t_stack *a)
 
 t_data	*get_min(t_stack *src)
 {
-	t_data *p;
-	t_data *tmp;
-	int i;
+	t_data	*p;
+	t_data	*tmp;
+	int		i;
 
 	i = INT_MAX;
 	p = src->head;
@@ -230,9 +229,9 @@ t_data	*get_min(t_stack *src)
 
 int		find_min_elem(t_stack *a)
 {
-	int prior;
-	t_data *p1;
-	t_data *start;
+	int		prior;
+	t_data	*p1;
+	t_data	*start;
 
 	p1 = get_min(a);
 	start = a->head;
@@ -327,7 +326,7 @@ int		min_prior(t_stack *b)
 	p = b->head;
 	i = p->prior;
 	n = 0;
-	while(p != NULL)
+	while (p != NULL)
 	{
 		if (i > p->prior)
 			i = p->prior;
@@ -413,7 +412,7 @@ void	compound_ab(t_stack *a, t_stack *b)
 
 void	rotate_stack_a1(t_stack *a, int i)
 {
-	if ((i - 1) < (a->size  - (i - 1)))
+	if ((i - 1) < (a->size - (i - 1)))
 	{
 		rotate(a);
 		a->command++;
@@ -468,77 +467,6 @@ void	incr_prior(t_stack *b)
 		i--;
 	}
 }
-
-//void	simple_form(t_stack *a)
-//{
-//	int  *arr;
-//	t_data *p;
-//	int i;
-//	int j;
-//
-//	arr = ft_memalloc(a->size + 1);
-//	p = a->head;
-//	i = 0;
-//	while (p != NULL)
-//	{
-//		arr[i] = p->num;
-//		p = p->next;
-//		i++;
-//	}
-//	i = 0;
-//	while (arr[i + 1] != '\0')
-//	{
-//		if (arr[i] > arr[i + 1])
-//		{
-//			j = arr[i + 1];
-//			arr[i + 1] = arr[i];
-//			arr[i] = j;
-//			i = 0;
-//			continue ;
-//		}
-//		i++;
-//	}
-//	i = 0;
-//	j = 0;
-//	while (arr[i] != '\0')
-//	{
-//		p = a->head;
-//		while (p != NULL)
-//		{
-//			if (arr[i] == p->num)
-//			{
-//				p->num = j;
-//				j++;
-//				break ;
-//			}
-//			p = p->next;
-//		}
-//		i++;
-//	}
-//	p = a->head;
-//
-//	printf("a: ");
-//	while (p != NULL)
-//	{
-//		printf("%d ", p->num);
-//		p = p->next;
-//	}
-//	printf("\n\n");
-//}
-
-//int		exit_cycle(t_stack *a)
-//{
-//	t_data *p;
-//
-//	p = a->head;
-//	while (p != NULL)
-//	{
-//		if (p->prior == 0)
-//			return (0);
-//		p = p->next;
-//	}
-//	return (1);
-//}
 
 void	three_elem1(t_stack *a, t_data *p1, t_data *p2, t_data *p3)
 {
@@ -606,7 +534,7 @@ void	conditions(t_stack *a, t_stack *b, int size)
 	if (size < 2)
 	{
 		ft_freee(a, b);
-		exit (0);
+		exit(0);
 	}
 	if (size == 3)
 		three_elem(a);
@@ -651,7 +579,7 @@ int		main(int ac, char **av)
 	size = a->size;
 	if (size <= 3)
 		conditions(a, b, size);
-	if(check_list(a, size))
+	if (check_list(a, size))
 	{
 		ft_freee(a, b);
 		return (0);
