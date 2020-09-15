@@ -89,9 +89,9 @@ add_executable(push_swap
 		libft/ft_tolower.c
 		libft/ft_toupper.c
 		libft/libft.h
-		src/checker.c
+#		src/checker.c
 		src/help_func.c
 		src/operators.c
-#		src/push_swap.c
+		src/push_swap.c
 		src/read.c
 		push_swap.h)

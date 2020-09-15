@@ -14,9 +14,9 @@
 
 int		check_list(t_stack *a, int size)
 {
-	int i;
-	t_data *p1;
-	t_data *p2;
+	int		i;
+	t_data	*p1;
+	t_data	*p2;
 
 	if (a->size != size)
 		return (0);
@@ -103,9 +103,9 @@ t_data	*max_sequence_greather(t_stack *a)
 
 void	to_stack_b(t_stack *a, t_stack *b, int size)
 {
-	t_data *p;
-	int i;
-	int j;
+	t_data	*p;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = a->size;
@@ -245,24 +245,24 @@ int		find_min_elem(t_stack *a)
 	return (prior);
 }
 
-void	prior_b(t_stack *a, t_stack *b)
+void	prior_for_middle(t_stack *b, t_data *p2, t_data *p1, int prior)
 {
-	t_data *p1;
+	t_data *p3;
+
+	p3 = b->head;
+	while (p3 != NULL)
+	{
+		if (p1->num < p3->num && p2->num > p3->num)
+			p3->prior = prior;
+		p3 = p3->next;
+	}
+}
+
+t_data	*begin_prior(t_stack *a, t_stack *b, t_data *p1, int prior)
+{
 	t_data *p2;
 	t_data *p3;
-	t_data *start;
-	int prior;
 
-	prior = find_min_elem(a);
-	p1 = get_min(a);
-//	start = a->head;
-//	prior = 0;
-//	while (start != p1)
-//	{
-//		start = start->next;
-//		prior++;
-//	}
-	start = p1;
 	if (p1->next)
 		p2 = p1->next;
 	else
@@ -274,26 +274,13 @@ void	prior_b(t_stack *a, t_stack *b)
 			p3->prior = prior;
 		p3 = p3->next;
 	}
-	prior++;
-	if (prior >= a->size)
-		prior -= a->size;
-	while (p2 != start)
-	{
-		p3 = b->head;
-		while (p3 != NULL)
-		{
-			if (p1->num < p3->num && p2->num > p3->num)
-				p3->prior = prior;
-			p3 = p3->next;
-		}
-		p1 = p2;
-		p2 = p2->next;
-		if (p2 == NULL)
-			p2 = a->head;
-		prior++;
-		if (prior >= a->size)
-			prior -= a->size;
-	}
+	return (p2);
+}
+
+void	end_prior(t_stack *b, t_data *p1, int prior)
+{
+	t_data *p3;
+
 	p3 = b->head;
 	while (p3 != NULL)
 	{
@@ -303,11 +290,39 @@ void	prior_b(t_stack *a, t_stack *b)
 	}
 }
 
+void	prior_b(t_stack *a, t_stack *b)
+{
+	t_data	*p1;
+	t_data	*p2;
+	t_data	*start;
+	int		prior;
+
+	prior = find_min_elem(a);
+	p1 = get_min(a);
+	start = p1;
+	p2 = begin_prior(a, b, p1, prior);
+	prior++;
+	if (prior >= a->size)
+		prior -= a->size;
+	while (p2 != start)
+	{
+		prior_for_middle(b, p2, p1, prior);
+		p1 = p2;
+		p2 = p2->next;
+		if (p2 == NULL)
+			p2 = a->head;
+		prior++;
+		if (prior >= a->size)
+			prior -= a->size;
+	}
+	end_prior(b, p1, prior);
+}
+
 int		min_prior(t_stack *b)
 {
-	t_data *p;
-	int i;
-	int n;
+	t_data	*p;
+	int		i;
+	int		n;
 
 	p = b->head;
 	i = p->prior;
@@ -414,9 +429,9 @@ void	rotate_stack_a1(t_stack *a, int i)
 
 void	rotate_stack_a(t_stack *a)
 {
-	t_data *p;
-	t_data *p1;
-	int i;
+	t_data	*p;
+	t_data	*p1;
+	int		i;
 
 	i = 0;
 	p = get_min(a);
@@ -432,8 +447,8 @@ void	rotate_stack_a(t_stack *a)
 
 void	incr_prior(t_stack *b)
 {
-	int i;
-	t_data *p;
+	int		i;
+	t_data	*p;
 
 	i = 0;
 	p = b->head;
@@ -586,11 +601,45 @@ void	five_elem(t_stack *a, t_stack *b)
 	three_elem(a);
 }
 
+void	conditions(t_stack *a, t_stack *b, int size)
+{
+	if (size < 2)
+	{
+		ft_freee(a, b);
+		exit (0);
+	}
+	if (size == 3)
+		three_elem(a);
+	else
+		check_swap(a);
+}
+
+void	help_func1(t_stack *a, t_stack *b, int size)
+{
+	t_data *tmp;
+
+	tmp = max_sequence_greather(a);
+	get_prior_greather(tmp, a);
+	to_stack_b(a, b, size);
+	sort_a(a);
+}
+
+void	help_func2(t_stack *a, t_stack *b)
+{
+	while (b->size > 0)
+	{
+		prior_b(a, b);
+		incr_prior(b);
+		compound_ab(a, b);
+	}
+	rotate_stack_a(a);
+	ft_freee(a, b);
+}
+
 int		main(int ac, char **av)
 {
 	t_stack	*a;
 	t_stack	*b;
-	t_data	*tmp;
 	int		size;
 
 	if (ac < 2)
@@ -600,15 +649,8 @@ int		main(int ac, char **av)
 	ft_init(a, b);
 	create_stack(a, ac, av);
 	size = a->size;
-	if (size < 2)
-	{
-		ft_freee(a, b);
-		return (0);
-	}
-	if (size == 3)
-		three_elem(a);
-	else
-		check_swap(a);
+	if (size <= 3)
+		conditions(a, b, size);
 	if(check_list(a, size))
 	{
 		ft_freee(a, b);
@@ -617,19 +659,7 @@ int		main(int ac, char **av)
 	if (size == 5)
 		five_elem(a, b);
 	else
-	{
-		tmp = max_sequence_greather(a);
-		get_prior_greather(tmp, a);
-		to_stack_b(a, b, size);
-		sort_a(a);
-	}
-	while(b->size > 0)
-	{
-		prior_b(a, b);
-		incr_prior(b);
-		compound_ab(a, b);
-	}
-	rotate_stack_a(a);
-	ft_freee(a, b);
+		help_func1(a, b, size);
+	help_func2(a, b);
 	return (0);
 }
