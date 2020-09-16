@@ -32,7 +32,7 @@ typedef struct		s_data
 typedef struct		s_stack
 {
 	size_t	command;
-	size_t	size;
+	int		size;
 	int		v;
 	t_data	*head;
 	t_data	*end;

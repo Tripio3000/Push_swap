@@ -36,13 +36,15 @@ OBJ = $(patsubst %.c,%.o,$(FILES_C)$(FILES_P))
 
 all : $(NAME_P) $(NAME_C)
 
-$(NAME_P) : $(OBJ)
-	@make -C $(LIBSRC)
-	@make -C ft_printf
-	@cc -o $(NAME_P) $(FILES_P) -I $(INCLUDES) $(LIB) $(PRINT) -g
+$(NAME_P) : lib_comp $(OBJ)
+	@cc $(FLAGS) -o $(NAME_P) $(FILES_P) -I $(INCLUDES) $(LIB) $(PRINT) -g
 
-$(NAME_C) : $(OBJ)
-	@cc -o $(NAME_C) $(FILES_C) -I $(INCLUDES) $(LIB) $(PRINT) -g
+$(NAME_C) : lib_comp $(OBJ)
+	@cc $(FLAGS) -o $(NAME_C) $(FILES_C) -I $(INCLUDES) $(LIB) $(PRINT) -g
+
+lib_comp :
+		@make -C $(LIBSRC) re
+		@make -C ft_printf
 
 %.o: %.c $(INCLUDES) libft/libft.h ft_printf/includes/ft_printf.h
 	cc -I $(INCLUDES) $< -c -o $@ -g
