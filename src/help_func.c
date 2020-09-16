@@ -38,3 +38,9 @@ long long	ft_atoi_long(const char *nptr)
 	}
 	return (s ? -res : res);
 }
+
+void		error(void)
+{
+	write(2, "Error\n", 6);
+	exit(0);
+}

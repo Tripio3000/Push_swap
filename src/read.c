@@ -82,84 +82,6 @@ char	**ft_split(char *str)
 	return (mas);
 }
 
-void	ft_init(t_stack *a, t_stack *b)
-{
-	a->size = 0;
-	a->head = NULL;
-	a->end = NULL;
-	b->size = 0;
-	b->head = NULL;
-	b->end = NULL;
-	a->command = 0;
-	a->v = 0;
-	b->v = 0;
-}
-
-void	push_back(t_stack *src, int num)
-{
-	t_data	*tmp;
-
-	tmp = (t_data *)malloc(sizeof(t_data));
-	tmp->num = num;
-	tmp->next = NULL;
-	tmp->prev = src->end;
-	if (src->end)
-		src->end->next = tmp;
-	src->end = tmp;
-	if (src->head == NULL)
-		src->head = tmp;
-	src->size++;
-}
-
-void	error(void)
-{
-	write(2, "Error\n", 6);
-	exit(0);
-}
-
-void	check_valid(char **mas)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (mas[i] != 0)
-	{
-		if (ft_strlen(mas[i]) > 11)
-			error();
-		j = 0;
-		while (mas[i][j] != '\0')
-		{
-			if ((mas[i][j] < '0' || mas[i][j] > '9') &&
-				mas[i][j] != '-' && mas[i][j] != '+')
-				error();
-			j++;
-		}
-		i++;
-	}
-}
-
-void	check_duplic(t_stack *a)
-{
-	t_data	*p1;
-	t_data	*p2;
-	int		i;
-
-	p1 = a->head;
-	while (p1 != NULL)
-	{
-		i = p1->num;
-		p2 = p1->next;
-		while (p2 != NULL)
-		{
-			if (i == p2->num)
-				error();
-			p2 = p2->next;
-		}
-		p1 = p1->next;
-	}
-}
-
 /*
 **	ЗАПОЛНЕНИЕ СПИСКА ЧИСЛАМИ ИЗ АРГУМЕНТА
 */
@@ -204,27 +126,4 @@ void	create_stack(t_stack *a, int ac, char **av)
 		create_stack1(mas);
 	}
 	check_duplic(a);
-}
-
-void	ft_freee(t_stack *a, t_stack *b)
-{
-	t_data	*p;
-	t_data	*tmp;
-
-	p = a->head;
-	while (p != NULL)
-	{
-		tmp = p->next;
-		ft_memdel((void *)&p);
-		p = tmp;
-	}
-	p = b->head;
-	while (p != NULL)
-	{
-		tmp = p->next;
-		ft_memdel((void *)&p);
-		p = tmp;
-	}
-	ft_memdel((void *)&a);
-	ft_memdel((void *)&b);
 }

@@ -2,11 +2,19 @@ FLAGS = -Wall -Wextra -Werror
 
 FILES_P = src/push_swap.c \
 			src/read.c \
+			src/read1.c \
 			src/operators.c \
 			src/help_func.c \
+			src/push_swap1.c \
+			src/push_swap2.c \
+			src/push_swap3.c \
+			src/push_swap4.c \
+			src/push_swap5.c \
 
 FILES_C = src/checker.c \
+			src/checker1.c \
 			src/read.c \
+			src/read1.c \
 			src/operators.c \
 			gnl/get_next_line.c \
 			src/help_func.c \

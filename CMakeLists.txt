@@ -92,6 +92,6 @@ add_executable(push_swap
 		src/checker.c
 		src/help_func.c
 		src/operators.c
-#		src/push_swap.c
+		src/push_swap.c
 		src/read.c
 		push_swap.h)

@@ -12,36 +12,6 @@
 
 #include "../push_swap.h"
 
-void	swapper(char *arr, t_stack *a, t_stack *b)
-{
-	if ((ft_strcmp(arr, "sa") == 0 || ft_strcmp(arr, "ss") == 0) &&
-		a->head != NULL && a->head->next != NULL)
-		swap(a);
-	if ((ft_strcmp(arr, "sb") == 0 || ft_strcmp(arr, "ss") == 0) &&
-		b->head != NULL && b->head->next != NULL)
-		swap(b);
-}
-
-void	rev_rotation(char *arr, t_stack *a, t_stack *b)
-{
-	if ((ft_strcmp(arr, "rra") == 0 || ft_strcmp(arr, "rrr") == 0) &&
-		a->head != NULL && a->head->next != NULL)
-		rev_rotate(a);
-	if ((ft_strcmp(arr, "rrb") == 0 || ft_strcmp(arr, "rrr") == 0) &&
-		b->head != NULL && b->head->next != NULL)
-		rev_rotate(b);
-}
-
-void	rotation(char *arr, t_stack *a, t_stack *b)
-{
-	if ((ft_strcmp(arr, "ra") == 0 || ft_strcmp(arr, "rr") == 0) &&
-		a->head != NULL && a->head->next != NULL)
-		rotate(a);
-	if ((ft_strcmp(arr, "rb") == 0 || ft_strcmp(arr, "rr") == 0) &&
-		b->head != NULL && b->head->next != NULL)
-		rotate(b);
-}
-
 int		wrong_size(t_stack *a, int size)
 {
 	if (a->size != size)
@@ -99,7 +69,7 @@ void	std_input(t_stack *a, t_stack *b, int size)
 {
 	char *arr;
 
-	if (a->v == 1)
+	if (a->v == 1 && size > 0)
 		print_stack(a, b);
 	while (get_next_line(0, &arr) > 0)
 	{
@@ -137,9 +107,13 @@ int		main(int ac, char **av)
 	ft_init(a, b);
 	if (ft_strcmp(av[1], "-v") == 0)
 		a->v = 1;
-
 	create_stack(a, ac, av);
 	size = a->size;
+	if (size < 1)
+	{
+		ft_freee(a, b);
+		exit(0);
+	}
 	std_input(a, b, size);
 	ft_freee(a, b);
 	return (0);
