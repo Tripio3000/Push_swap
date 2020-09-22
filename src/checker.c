@@ -102,6 +102,8 @@ int		main(int ac, char **av)
 
 	if (ac < 2)
 		exit(0);
+	if (ac == 2 && ft_strcmp(av[1], "-") == 0)
+		error();
 	a = (t_stack *)malloc(sizeof(t_stack));
 	b = (t_stack *)malloc(sizeof(t_stack));
 	ft_init(a, b);

@@ -37,10 +37,10 @@ OBJ = $(patsubst %.c,%.o,$(FILES_C)$(FILES_P))
 all : $(NAME_P) $(NAME_C)
 
 $(NAME_P) : lib_comp $(OBJ)
-	@cc $(FLAGS) -o $(NAME_P) $(FILES_P) -I $(INCLUDES) $(LIB) $(PRINT) -g
+	@cc $(FLAGS) -o $(NAME_P) $(FILES_P) -I $(INCLUDES) $(LIB) $(PRINT)
 
 $(NAME_C) : lib_comp $(OBJ)
-	@cc $(FLAGS) -o $(NAME_C) $(FILES_C) -I $(INCLUDES) $(LIB) $(PRINT) -g
+	@cc $(FLAGS) -o $(NAME_C) $(FILES_C) -I $(INCLUDES) $(LIB) $(PRINT)
 
 lib_comp :
 		@make -C $(LIBSRC) re
