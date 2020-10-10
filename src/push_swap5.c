@@ -12,6 +12,10 @@
 
 #include "../push_swap.h"
 
+/*
+** ЗАНУЛЯЕМ ПРИОРИТЕТЫ ВСЕХ ЭЛЕМЕНТОВ СТЕКА
+*/
+
 void	null_prior(t_stack *a)
 {
 	t_data *p;
@@ -23,6 +27,10 @@ void	null_prior(t_stack *a)
 		p = p->next;
 	}
 }
+
+/*
+** НАХОДИМ МАКСИМАЛЬНУЮ НЕУБЫВАЮЩУЮ ПОСЛЕДОВАТЕЛЬНОСТЬ В СТЕКЕ
+*/
 
 int		find_prior(t_data *start, t_stack *a)
 {
@@ -76,6 +84,10 @@ t_data	*max_sequence_greather(t_stack *a)
 	return (tmp);
 }
 
+/*
+** ПЕРЕНОСИМ ПОМЕЧЕННЫЕ ЭЛЕМЕНТЫ В СТЕК Б
+*/
+
 void	to_stack_b(t_stack *a, t_stack *b, int size)
 {
 	t_data	*p;
@@ -104,6 +116,11 @@ void	to_stack_b(t_stack *a, t_stack *b, int size)
 		i++;
 	}
 }
+
+/*
+** ПРИСВАИВАЕМ ПРИОРИТЕТ=1 ДЛЯ ЭЛЕМЕНТОВ МАКС.
+** НЕУБЫВАЮЩЕЙ ПОСЛЕДОВАТЕЛЬНОСТИ
+*/
 
 void	get_prior_greather(t_data *tmp, t_stack *a)
 {

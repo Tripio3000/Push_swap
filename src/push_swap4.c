@@ -36,6 +36,11 @@ t_data	*get_min(t_stack *src)
 	return (tmp);
 }
 
+/*
+** НАХОДИМ ЭЛЕМЕНТ С МИНИМАЛЬНЫМ ПРИОРИТЕТОМ
+*/
+
+
 int		min_prior(t_stack *b)
 {
 	t_data	*p;
@@ -59,6 +64,11 @@ int		min_prior(t_stack *b)
 	}
 	return (n);
 }
+
+/*
+** ВРАЩАЕМ СТЕКА А В ЗАВИСИМОСТИ ОТ ПОЛОЖЕНИЯ НУЖНОГО
+** ЭЛЕМЕНТА ОТНОСИТЕЛЬНО КОНЦОВ СТЕКА
+*/
 
 void	rotate_stack_a1(t_stack *a, int i)
 {
@@ -93,6 +103,10 @@ void	rotate_stack_a(t_stack *a)
 	while (a->head != p)
 		rotate_stack_a1(a, i);
 }
+
+/*
+** ПРОВЕРЯЕМ ОТСОРТИРОВАН ЛИ МАССИВ
+*/
 
 int		check_list(t_stack *a, int size)
 {

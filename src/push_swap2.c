@@ -12,6 +12,10 @@
 
 #include "../push_swap.h"
 
+/*
+** ВРАЩАЕМ СТЕКИ НУЖНОЕ КОЛИЧЕСТВО РАЗ И ПЕРЕНОСИМ ЭЛЕМЕНТ В СТЕК А.
+*/
+
 void	compound_ab2(t_stack *a, t_stack *b, int i)
 {
 	if (i < a->size / 2)
@@ -80,6 +84,11 @@ void	compound_ab(t_stack *a, t_stack *b)
 	a->command++;
 	ft_putstr("pa\n");
 }
+
+/*
+** УВЕЛИЧИВАЕМ ПРИОРИТЕТ ЭЛЕМЕНТА, В ЗАВИСИМОСТИ ОТ ЕГО
+** ПОЗИЦИИ ОТНОСИТЕЛЬНО КОНЦОВ СТЕКА.
+*/
 
 void	incr_prior(t_stack *b)
 {

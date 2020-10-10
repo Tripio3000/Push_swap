@@ -12,6 +12,11 @@
 
 #include "../push_swap.h"
 
+/*
+** ВЫСЧИТЫВАЕМ ПРИОРИТЕТЫ ДЛЯ КАЖДОГО ЭЛЕМЕНТА СТЕКА Б.
+** СУТЬ: СКОЛЬКО ОПЕРАЦИЙ ВРАЩЕНИЯ СТЕКА А НАДО СДЕЛАТЬ, ЧТОБ ЭЛЕМЕНТ ВСТАЛ В НУЖНОЕ МЕСТО
+*/
+
 void	prior_b(t_stack *a, t_stack *b)
 {
 	t_data	*p1;
@@ -40,6 +45,11 @@ void	prior_b(t_stack *a, t_stack *b)
 	end_prior(b, p1, prior);
 }
 
+/*
+** ВЫСЧИТЫВАЕМ МИНИМАЛЬНЫЙ ЭЛЕМЕНТ В СТЕКЕ И ВОЗВРАЩАЕМ
+** ЗНАЧЕНИЕ ПРИОРИТЕТА ДЛЯ НЕГО
+*/
+
 int		find_min_elem(t_stack *a)
 {
 	int		prior;
@@ -56,6 +66,10 @@ int		find_min_elem(t_stack *a)
 	}
 	return (prior);
 }
+
+/*
+** ВЫСТАВЛЯЕМ ПРИОРИТЕТЫ ДЛЯ НАЧАЛА, СЕРИДИНЫ И КОНЦА СТЕКА Б ОТДЕЛЬНО.
+*/
 
 void	prior_for_middle(t_stack *b, t_data *p2, t_data *p1, int prior)
 {

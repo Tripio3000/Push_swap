@@ -12,6 +12,10 @@
 
 #include "../push_swap.h"
 
+/*
+** СОРТИРОВКА ТРЕХ ЭЛЕМЕНТОВ
+*/
+
 void	three_elem1(t_stack *a, t_data *p1, t_data *p2, t_data *p3)
 {
 	if (p1->num < p2->num && p2->num > p3->num && p3->num > p1->num)
@@ -63,6 +67,10 @@ void	three_elem(t_stack *a)
 		three_elem1(a, p1, p2, p3);
 }
 
+/*
+** ЕСЛИ В СТЕКЕ 5 ЭЛЕМЕНТОВ
+*/
+
 void	five_elem(t_stack *a, t_stack *b)
 {
 	push(a, b);
@@ -72,6 +80,10 @@ void	five_elem(t_stack *a, t_stack *b)
 	a->command += 2;
 	three_elem(a);
 }
+
+/*
+** СЛУЧАЙ С <= 3 ЭЛЕМЕНТАМИ
+*/
 
 void	conditions(t_stack *a, t_stack *b, int size)
 {
@@ -85,6 +97,10 @@ void	conditions(t_stack *a, t_stack *b, int size)
 	else
 		check_swap(a);
 }
+
+/*
+** ПРОВЕРКА НЕОБХОДИМОСТИ ПРИМЕНЕНИЯ КОМАНДЫ sa
+*/
 
 void	check_swap(t_stack *a)
 {
