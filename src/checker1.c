@@ -12,6 +12,10 @@
 
 #include "../push_swap.h"
 
+/*
+** РАСПОЗНАНИЕ КОМАНД ИЗ СТАНДАРТНОГО ВВОДА.
+*/
+
 void	swapper(char *arr, t_stack *a, t_stack *b)
 {
 	if ((ft_strcmp(arr, "sa") == 0 || ft_strcmp(arr, "ss") == 0) &&

@@ -40,6 +40,10 @@ void	print_stack(t_stack *a, t_stack *b)
 	ft_printf("+-------------+-------------+\n");
 }
 
+/*
+** РАЗБИВАЕМ СТРОКУ НА ДВУМЕРНЫЙ МАССИВ ПО ПРОБЕЛАМ(НЕПЕЧАТНЫМ СИМВОЛАМ).
+*/
+
 char	**ft_split1(char *str, int i, int k)
 {
 	int		j;

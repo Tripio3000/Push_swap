@@ -22,6 +22,10 @@ int		wrong_size(t_stack *a, int size)
 	return (0);
 }
 
+/*
+** ПРОВЕРКА ОТСОРТИРОВАННОСТИ СТЕКА.
+*/
+
 void	ascending_order(t_stack *a, int size)
 {
 	int		i;
@@ -49,6 +53,10 @@ void	ascending_order(t_stack *a, int size)
 	}
 	ft_putstr("OK\n");
 }
+
+/*
+** ПРОВЕРКА НЕВАЛИДНЫХ КОМАНД.
+*/
 
 void	check_command(char *arr)
 {

@@ -12,6 +12,10 @@
 
 #include "../push_swap.h"
 
+/*
+** ВСЕ НУЖНЫЕ КОМАНДЫ.
+*/
+
 void	swap(t_stack *a)
 {
 	t_data *p1;

@@ -25,6 +25,10 @@ void	ft_init(t_stack *a, t_stack *b)
 	b->v = 0;
 }
 
+/*
+** ВЫДЕЛЕНИЕ ПАМЯТИ НА НОВЫЙ ЭЛЕМЕНТ СТЕКА И ДОБАВЛЕНИЕ ЕГО В КОНЕЦ.
+*/
+
 void	push_back(t_stack *src, int num)
 {
 	t_data	*tmp;
@@ -40,6 +44,10 @@ void	push_back(t_stack *src, int num)
 		src->head = tmp;
 	src->size++;
 }
+
+/*
+** ПРОВЕРКА ВАЛИДНОСТИ: ЧИСЛА ОТ 0 ДО 9 И -
+*/
 
 void	check_valid(char **mas)
 {
@@ -63,6 +71,10 @@ void	check_valid(char **mas)
 	}
 }
 
+/*
+**ПРОВЕРКА НА ОТСУТСТВИЕ ПОВТОРОВ.
+*/
+
 void	check_duplic(t_stack *a)
 {
 	t_data	*p1;
@@ -83,6 +95,10 @@ void	check_duplic(t_stack *a)
 		p1 = p1->next;
 	}
 }
+
+/*
+** ОЧИСТКА ПАМЯТИ.
+*/
 
 void	ft_freee(t_stack *a, t_stack *b)
 {
